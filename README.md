@@ -24,7 +24,7 @@ presentationen innefatta en reflekterande del. Varje grupp har ca 20 min på sig
 komponenter.
 - [ ] De utvalda komponenterna ska antecknas i er README tillsammans med en lista över
 genomförda krav.
-- [ ] Git & GitHub har använts
+- [X] Git & GitHub har använts
 - [ ] Projektmappen innehåller en README.md fil - (läs ovan för mer info)
 - [ ] Uppgiften lämnas in i tid!
 - [ ] Muntlig presentation är genomförd
