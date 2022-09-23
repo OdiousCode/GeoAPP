@@ -34,5 +34,5 @@ genomförda krav.
 - [ ] Alla punkter för godkänt är uppfyllda
 - [ ] React Navigation används för att skapa en bättre upplevelse i appen.
 - [ ] Ytterligare en valfri extern modul används i projektet.
-- [ ] Prototyper för applikation tas fram innan den implementeras. Bilder på prototypen
+- [X] Prototyper för applikation tas fram innan den implementeras. Bilder på prototypen
 skall finnas i projektet vid inlämning.
