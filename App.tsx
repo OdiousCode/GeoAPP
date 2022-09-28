@@ -1,79 +1,105 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import React from "react";
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import React from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import MapScreen from "./screens/MapScreen";
-import LoginScreen from "./screens/LoginScreen";
-import QuestionScreen from "./screens/QuestionScreen";
-import ResultsScreen from "./screens/ResultsScreen";
-import OverviewScreen from "./screens/OverviewScreen";
+import MapScreen from './screens/MapScreen';
+import LoginScreen from './screens/LoginScreen';
+import QuestionScreen from './screens/QuestionScreen';
+import ResultsScreen from './screens/ResultsScreen';
+import OverviewScreen from './screens/OverviewScreen';
 
-export type RootStackParamList = {
+// export type RootStackParamList = {
+//   Login: undefined;
+//   Map: { quizWalkId: number; path?: string };
+//   Question: { quizWalkId: number; questionId: number; path?: string };
+//   Results: { quizWalkId: number; path?: string };
+//   Overview: { quizWalkId: number; path?: string };
+// };
+
+export type RootTabsParamList = {
   Login: undefined;
-  Map: { quizWalkId: number; path?: string };
-  Question: { quizWalkId: number; questionId: number; path?: string };
-  Results: { quizWalkId: number; path?: string };
-  Overview: { quizWalkId: number; path?: string };
+  // Map: { quizWalkId: number;  };
+  // Question: { quizWalkId: number; questionId: number;  };
+  // Results: { quizWalkId: number;  };
+  // Overview: { quizWalkId: number;};
+  Map: undefined;
+  Question: undefined;
+  Results: undefined;
+  Overview: undefined;
 };
 
-const NativeStack = createNativeStackNavigator<RootStackParamList>();
+// const NativeStack = createNativeStackNavigator<RootStackParamList>();
+const RootTabs = createBottomTabNavigator<RootTabsParamList>();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <StatusBar style="light" />
-      <NativeStack.Navigator
-        initialRouteName="Login"
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: "grey",
-          },
-          headerTintColor: "white",
-          animation: "slide_from_right",
-          animationDuration: 1500,
-          // headerRight: () => <Text>Test</Text>,
-        }}
-      >
-        <NativeStack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{ title: "Login" }}
-        />
-        <NativeStack.Screen
-          name="Map"
-          component={MapScreen}
-          options={({ route }) => ({
-            title: "Map " + route.params.quizWalkId,
-          })}
-        />
-        <NativeStack.Screen
-          name="Question"
-          component={QuestionScreen}
-          options={({ route }) => ({
-            title:
-              "Question " +
-              route.params.questionId +
-              " - " +
-              route.params.quizWalkId,
-          })}
-        />
-        <NativeStack.Screen
-          name="Results"
-          component={ResultsScreen}
-          options={({ route }) => ({
-            title: "Results " + route.params.quizWalkId,
-          })}
-        />
-        <NativeStack.Screen
-          name="Overview"
-          component={OverviewScreen}
-          options={({ route }) => ({
-            title: "Overview " + route.params.quizWalkId,
-          })}
-        />
-      </NativeStack.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <StatusBar style="light" />
+        {/* <NativeStack.Navigator> */}
+        <RootTabs.Navigator
+          initialRouteName="Login"
+          screenOptions={{
+            headerShown: false,
+            headerTintColor: 'white',
+          }}
+        >
+          <RootTabs.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{
+              tabBarIcon: ({ size, color }) => (
+                <MaterialIcons name="home" size={size} color={color} />
+              ),
+              // tabBarStyle: { display: 'none' },
+            }}
+          />
+
+          <RootTabs.Screen
+            name="Map"
+            component={MapScreen}
+            options={{
+              tabBarIcon: ({ size, color }) => (
+                <MaterialIcons name="home" size={size} color={color} />
+              ),
+            }}
+          />
+          <RootTabs.Screen
+            name="Question"
+            component={QuestionScreen}
+            options={{
+              tabBarIcon: ({ size, color }) => (
+                <MaterialIcons name="home" size={size} color={color} />
+              ),
+            }}
+          />
+          <RootTabs.Screen
+            name="Results"
+            component={ResultsScreen}
+            options={{
+              tabBarIcon: ({ size, color }) => (
+                <MaterialIcons name="home" size={size} color={color} />
+              ),
+            }}
+          />
+          <RootTabs.Screen
+            name="Overview"
+            component={OverviewScreen}
+            options={{
+              tabBarIcon: ({ size, color }) => (
+                <MaterialIcons name="home" size={size} color={color} />
+              ),
+            }}
+          />
+        </RootTabs.Navigator>
+        {/* </NativeStack.Navigator> */}
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }

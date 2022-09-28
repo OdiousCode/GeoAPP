@@ -19,30 +19,34 @@ export interface QuizWalkQuestion {
 const mockQuizWalks: QuizWalk[] = [
   {
     id: 1,
-    title: "Djurparks Gången",
+    title: 'Djurparks Gången',
     questions: [
       {
         id: 1,
-        title: "Kungen",
-        question: "Vem var kungen i djungelboken",
-        latitude: 23,
-        longitude: 21,
-        1: "Ballo",
-        2: "Pumba",
-        3: "Idk",
+        title: 'Kungen',
+        question: 'Vem var kungen i djungelboken',
+        latitude: 57.721111,
+        longitude: 12.940278,
+        1: 'Ballo',
+        2: 'Pumba',
+        3: 'Idk',
         correctAnswer: 1,
       },
       {
         id: 2,
-        title: "Drottningen",
-        question: "Vem var Drottningen i djungelboken",
+        title: 'Drottningen',
+        question: 'Vem var Drottningen i djungelboken',
         latitude: 24,
         longitude: 21,
-        1: "Ballo",
-        2: "Pumba",
-        3: "Idk",
+        1: 'Ballo',
+        2: 'Pumba',
+        3: 'Idk',
         correctAnswer: 2,
       },
     ],
   },
 ];
+
+export function getData(number: number) {
+  return mockQuizWalks[number];
+}
