@@ -10,7 +10,10 @@ export default function OverviewScreen({ navigation, route }: Props) {
   let data: QuizWalk = getData(0);
   return (
     <SafeAreaView style={[styles.container]}>
-      <Image source={require('../assets/geoappsplash.png')}></Image>
+      <Image
+        source={require('../assets/protipsers.png')}
+        resizeMode={'cover'}
+      ></Image>
       <View style={{ margin: 10 }}>
         <Text style={{ fontSize: 29, fontWeight: 'bold' }}>{data.title}</Text>
       </View>
@@ -34,6 +37,7 @@ export default function OverviewScreen({ navigation, route }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: '100%',
     backgroundColor: '#adadad',
     alignItems: 'center',
     justifyContent: 'flex-start',
