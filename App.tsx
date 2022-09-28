@@ -33,6 +33,7 @@ export type RootTabsParamList = {
   Question: undefined;
   Results: undefined;
   Overview: undefined;
+  Home: undefined;
 };
 
 // const NativeStack = createNativeStackNavigator<RootStackParamList>();
