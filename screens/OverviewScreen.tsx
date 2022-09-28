@@ -3,16 +3,16 @@ import React from 'react';
 import { Button, StyleSheet, Text, View, Image } from 'react-native';
 import { RootTabsParamList } from '../App';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { getData, QuizWalk } from '../data/data';
 type Props = NativeStackScreenProps<RootTabsParamList, 'Overview'>;
 
 export default function OverviewScreen({ navigation, route }: Props) {
+  let data: QuizWalk = getData(0);
   return (
     <SafeAreaView style={[styles.container]}>
       <Image source={require('../assets/geoappsplash.png')}></Image>
       <View style={{ margin: 10 }}>
-        <Text style={{ fontSize: 29, fontWeight: 'bold' }}>
-          Quiz: Sample quiz #1
-        </Text>
+        <Text style={{ fontSize: 29, fontWeight: 'bold' }}>{data.title}</Text>
       </View>
       <View style={{ margin: 10 }}>
         <Text>Du har besvarat 7/10 frågor.</Text>
