@@ -1,12 +1,17 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import React from 'react'
-import { Button, StyleSheet, View } from 'react-native'
-import MapView from 'react-native-maps'
-import { RootStackParamList } from '../App'
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import React from 'react';
+import { Button, StyleSheet, View } from 'react-native';
+import MapView from 'react-native-maps';
+import { RootTabsParamList } from '../App';
+import { getData, QuizWalk } from '../data/data';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Map'>
+type Props = NativeStackScreenProps<RootTabsParamList, 'Map'>;
 
 export default function MapScreen({ navigation, route }: Props) {
+  //data = XXX.fetch(route.params.quizWalkId);
+  let data: QuizWalk = getData(0);
+  console.log(data);
+
   return (
     <View style={styles.container}>
       <MapView
@@ -21,7 +26,7 @@ export default function MapScreen({ navigation, route }: Props) {
 
       <Button title="Gå tillbaka" onPress={() => navigation.goBack()} />
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -55,4 +60,4 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#fff',
   },
-})
+});
