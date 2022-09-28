@@ -40,7 +40,7 @@ export default function MapScreen({ navigation, route }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ddd',
+    backgroundColor: '#adadad',
   },
   map: {
     width: Dimensions.get('window').width,
