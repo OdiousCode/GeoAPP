@@ -4,6 +4,9 @@ import { Button, StyleSheet, Text, View, Image } from 'react-native';
 import { RootTabsParamList } from '../App';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { getData, QuizWalk } from '../data/data';
+
+import { coltheme } from '../components/coltheme';
+
 type Props = NativeStackScreenProps<RootTabsParamList, 'Home'>;
 
 export default function HomeScreen({ navigation, route }: Props) {
@@ -15,17 +18,17 @@ export default function HomeScreen({ navigation, route }: Props) {
         resizeMode={'cover'}
       ></Image>
       <View style={{ margin: 10 }}>
-        <Text style={{ fontSize: 29, fontWeight: 'bold' }}>{data.title}</Text>
+        <Text style={[styles.bigText]}>{data.title}</Text>
       </View>
       <View style={{ margin: 10 }}>
-        <Text>Du har besvarat 7/10 frågor.</Text>
+        <Text style={[styles.smallText]}>Du har besvarat 7/10 frågor.</Text>
       </View>
       <View style={{ margin: 10 }}>
-        <Text>Antal steg: 4481</Text>
+        <Text style={[styles.smallText]}>Antal steg: 4481</Text>
       </View>
       <View style={styles.buttonContainer}>
         <Button
-          color={'#0c3663'}
+          color={coltheme.purple}
           title="Lämna in"
           onPress={() => navigation.goBack()}
         />
@@ -38,7 +41,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    backgroundColor: '#adadad',
+    backgroundColor: coltheme.background,
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
@@ -50,4 +53,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
+  smallText: {
+    fontSize: 13,
+    fontWeight: 'normal',
+    color: coltheme.primary,
+  },
+  bigText: { fontSize: 29, fontWeight: 'bold', color: coltheme.secondary },
 });

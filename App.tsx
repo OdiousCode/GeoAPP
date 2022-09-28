@@ -15,6 +15,7 @@ import ResultsScreen from './screens/ResultsScreen';
 import OverviewScreen from './screens/OverviewScreen';
 import HomeScreen from './screens/HomeScreen';
 
+import { coltheme } from './components/coltheme';
 // export type RootStackParamList = {
 //   Login: undefined;
 //   Map: { quizWalkId: number; path?: string };

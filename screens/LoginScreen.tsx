@@ -3,7 +3,7 @@ import React from 'react';
 import { Button, StyleSheet, Text, View, Image, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootTabsParamList } from '../App';
-
+import { coltheme } from '../components/coltheme';
 type Props = NativeStackScreenProps<RootTabsParamList, 'Login'>;
 
 export default function LoginScreen({ navigation, route }: Props) {
@@ -11,19 +11,17 @@ export default function LoginScreen({ navigation, route }: Props) {
     <SafeAreaView style={[styles.container]}>
       <Image source={require('../assets/geoappsplash.png')}></Image>
       <View style={{ margin: 10 }}>
-        <Text style={{ fontSize: 29, fontWeight: 'bold' }}>
-          TipsPROmenader 2000
-        </Text>
+        <Text style={[styles.bigText]}>TipsPROmenader 2000</Text>
       </View>
       <View style={{ margin: 2 }}>
-        <TextInput>Ange kod här</TextInput>
+        <TextInput style={[styles.smallText]}>Ange kod här</TextInput>
       </View>
-      <Button color={'#0c3663'} title="Logga in" />
+      <Button color={coltheme.purple} title="Logga in" />
       <View style={{ margin: 2 }}>
-        <Text>Skapa en quiz?</Text>
+        <Text style={[styles.smallText]}>Skapa en quiz?</Text>
       </View>
       <View style={{ margin: 2 }}>
-        <Button color={'#0c3663'} title="Skapa quiz" />
+        <Button color={coltheme.purple} title="Skapa quiz" />
       </View>
     </SafeAreaView>
   );
@@ -32,7 +30,8 @@ export default function LoginScreen({ navigation, route }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#adadad',
+    width: '100%',
+    backgroundColor: coltheme.background,
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
@@ -40,7 +39,14 @@ const styles = StyleSheet.create({
     flex: 1,
     bottom: 0,
     marginBottom: 10,
+    // backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
+  smallText: {
+    fontSize: 13,
+    fontWeight: 'normal',
+    color: coltheme.primary,
+  },
+  bigText: { fontSize: 29, fontWeight: 'bold', color: coltheme.secondary },
 });
