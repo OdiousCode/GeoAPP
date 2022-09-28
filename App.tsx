@@ -13,7 +13,9 @@ import LoginScreen from './screens/LoginScreen';
 import QuestionScreen from './screens/QuestionScreen';
 import ResultsScreen from './screens/ResultsScreen';
 import OverviewScreen from './screens/OverviewScreen';
+import HomeScreen from './screens/HomeScreen';
 
+import { coltheme } from './components/coltheme';
 // export type RootStackParamList = {
 //   Login: undefined;
 //   Map: { quizWalkId: number; path?: string };
@@ -32,14 +34,17 @@ export type RootTabsParamList = {
   Question: undefined;
   Results: undefined;
   Overview: undefined;
+  Home: undefined;
 };
 
 // const NativeStack = createNativeStackNavigator<RootStackParamList>();
 const RootTabs = createBottomTabNavigator<RootTabsParamList>();
 
 export default function App() {
+  const color = coltheme.secondary;
+
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider style={{ backgroundColor: coltheme.background }}>
       <NavigationContainer>
         <StatusBar style="light" />
         {/* <NativeStack.Navigator> */}
@@ -47,7 +52,11 @@ export default function App() {
           initialRouteName="Login"
           screenOptions={{
             headerShown: false,
-            headerTintColor: 'white',
+            headerTintColor: coltheme.background,
+            tabBarActiveTintColor: coltheme.purple,
+            tabBarInactiveTintColor: coltheme.secondary,
+            tabBarInactiveBackgroundColor: coltheme.primary,
+            tabBarActiveBackgroundColor: coltheme.secondary,
           }}
         >
           <RootTabs.Screen
@@ -91,6 +100,15 @@ export default function App() {
           <RootTabs.Screen
             name="Overview"
             component={OverviewScreen}
+            options={{
+              tabBarIcon: ({ size, color }) => (
+                <MaterialIcons name="home" size={size} color={color} />
+              ),
+            }}
+          />
+          <RootTabs.Screen
+            name="Home"
+            component={HomeScreen}
             options={{
               tabBarIcon: ({ size, color }) => (
                 <MaterialIcons name="home" size={size} color={color} />
