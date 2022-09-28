@@ -41,8 +41,10 @@ export type RootTabsParamList = {
 const RootTabs = createBottomTabNavigator<RootTabsParamList>();
 
 export default function App() {
+  const color = coltheme.secondary;
+
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider style={{ backgroundColor: coltheme.background }}>
       <NavigationContainer>
         <StatusBar style="light" />
         {/* <NativeStack.Navigator> */}
@@ -50,7 +52,11 @@ export default function App() {
           initialRouteName="Login"
           screenOptions={{
             headerShown: false,
-            headerTintColor: 'white',
+            headerTintColor: coltheme.background,
+            tabBarActiveTintColor: coltheme.purple,
+            tabBarInactiveTintColor: coltheme.secondary,
+            tabBarInactiveBackgroundColor: coltheme.primary,
+            tabBarActiveBackgroundColor: coltheme.secondary,
           }}
         >
           <RootTabs.Screen
