@@ -13,6 +13,7 @@ import LoginScreen from './screens/LoginScreen';
 import QuestionScreen from './screens/QuestionScreen';
 import ResultsScreen from './screens/ResultsScreen';
 import OverviewScreen from './screens/OverviewScreen';
+import HomeScreen from './screens/HomeScreen';
 
 // export type RootStackParamList = {
 //   Login: undefined;
@@ -91,6 +92,15 @@ export default function App() {
           <RootTabs.Screen
             name="Overview"
             component={OverviewScreen}
+            options={{
+              tabBarIcon: ({ size, color }) => (
+                <MaterialIcons name="home" size={size} color={color} />
+              ),
+            }}
+          />
+          <RootTabs.Screen
+            name="Home"
+            component={HomeScreen}
             options={{
               tabBarIcon: ({ size, color }) => (
                 <MaterialIcons name="home" size={size} color={color} />
