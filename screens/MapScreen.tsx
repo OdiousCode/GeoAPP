@@ -2,6 +2,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import MapView from 'react-native-maps';
 import { RootTabsParamList } from '../App';
 import { getData, QuizWalk } from '../data/data';
@@ -13,7 +14,7 @@ export default function MapScreen({ navigation, route }: Props) {
   let data: QuizWalk = getData(0);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={[styles.container]}>
       <MapView
         style={styles.map}
         initialRegion={{
@@ -33,7 +34,7 @@ export default function MapScreen({ navigation, route }: Props) {
         <MaterialIcons name="circle" size={24} color="red" />
         <Text>Oupptäckta frågor: ?/?</Text>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
