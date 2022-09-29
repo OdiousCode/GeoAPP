@@ -1,11 +1,12 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { Button, StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import { RootTabsParamList } from '../App';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { getData, QuizWalk } from '../data/data';
-
+import { BigText, SmallText } from '../components/TextTemplates';
 import { coltheme } from '../components/coltheme';
+import RegularButton from '../components/RegularButton';
 
 type Props = NativeStackScreenProps<RootTabsParamList, 'Home'>;
 
@@ -18,20 +19,22 @@ export default function HomeScreen({ navigation, route }: Props) {
         resizeMode={'cover'}
       ></Image>
       <View style={{ margin: 10 }}>
-        <Text style={[styles.bigText]}>{data.title}</Text>
+        <BigText textStyles={{ color: coltheme.pink }}>{data.title}</BigText>
       </View>
       <View style={{ margin: 10 }}>
-        <Text style={[styles.smallText]}>Du har besvarat 7/10 frågor.</Text>
+        <SmallText>Du har besvarat 7/10 frågor.</SmallText>
       </View>
       <View style={{ margin: 10 }}>
-        <Text style={[styles.smallText]}>Antal steg: 4481</Text>
+        <SmallText>Antal steg: 4481</SmallText>
       </View>
+      <SmallText>hej</SmallText>
       <View style={styles.buttonContainer}>
-        <Button
-          color={coltheme.purple}
-          title="Lämna in"
+        <RegularButton
+          btnStyles={{ width: 100 }}
           onPress={() => navigation.goBack()}
-        />
+        >
+          Lämna in
+        </RegularButton>
       </View>
     </SafeAreaView>
   );
@@ -56,7 +59,7 @@ const styles = StyleSheet.create({
   smallText: {
     fontSize: 13,
     fontWeight: 'normal',
-    color: coltheme.primary,
+    color: coltheme.white,
   },
   bigText: { fontSize: 29, fontWeight: 'bold', color: coltheme.secondary },
 });
