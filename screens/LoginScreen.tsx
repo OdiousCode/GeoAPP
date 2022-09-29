@@ -1,12 +1,19 @@
+import { NavigateBefore } from '@mui/icons-material';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { Button, StyleSheet, Text, View, Image, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootTabsParamList } from '../App';
 import { coltheme } from '../components/coltheme';
+import RegularButton from '../components/RegularButton';
+import { RootStackParamList } from '../navigators/RootStackNavigator';
+
 type Props = NativeStackScreenProps<RootTabsParamList, 'Login'>;
 
-export default function LoginScreen({ navigation, route }: Props) {
+export default function LoginScreen({
+  navigation,
+  route,
+}: RootStackParamList<'Login'>) {
   return (
     <SafeAreaView style={[styles.container]}>
       <Image source={require('../assets/geoappsplash.png')}></Image>
@@ -16,7 +23,14 @@ export default function LoginScreen({ navigation, route }: Props) {
       <View style={{ margin: 2 }}>
         <TextInput style={[styles.smallText]}>Ange kod här</TextInput>
       </View>
-      <Button color={coltheme.purple} title="Logga in" />
+      <RegularButton
+        onPress={() => {
+          navigation.navigate();
+        }}
+      >
+        {' '}
+        Logga in
+      </RegularButton>
       <View style={{ margin: 2 }}>
         <Text style={[styles.smallText]}>Skapa en quiz?</Text>
       </View>

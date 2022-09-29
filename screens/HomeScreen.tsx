@@ -7,10 +7,14 @@ import { getData, QuizWalk } from '../data/data';
 import { BigText, SmallText } from '../components/TextTemplates';
 import { coltheme } from '../components/coltheme';
 import RegularButton from '../components/RegularButton';
+import { TabScreenProps } from '../navigators/TabNavigator';
 
 type Props = NativeStackScreenProps<RootTabsParamList, 'Home'>;
 
-export default function HomeScreen({ navigation, route }: Props) {
+export default function HomeScreen({
+  navigation,
+  route,
+}: TabScreenProps<'HomeScreen'>) {
   let data: QuizWalk = getData(0);
   return (
     <SafeAreaView style={[styles.container]}>

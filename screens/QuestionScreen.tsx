@@ -2,10 +2,14 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { RootTabsParamList } from '../App';
+import { QuestionScreenProps } from '../navigators/QuestionStackNavigator';
 
 type Props = NativeStackScreenProps<RootTabsParamList, 'Question'>;
 
-export default function QuestionScreen({ navigation, route }: Props) {
+export default function QuestionScreen({
+  navigation,
+  route,
+}: QuestionScreenProps<'QuestionScreen'>) {
   return (
     <View style={styles.container}>
       <Text>Questions </Text>

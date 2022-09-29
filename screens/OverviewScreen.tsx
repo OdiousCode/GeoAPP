@@ -4,10 +4,14 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 import { RootTabsParamList } from '../App';
 import { useQuiz } from '../context/QuizContext';
 import { getData, QuizWalk } from '../data/data';
+import { TabScreenProps } from '../navigators/TabNavigator';
 
 type Props = NativeStackScreenProps<RootTabsParamList, 'Overview'>;
 
-export default function OverviewScreen({ navigation, route }: Props) {
+export default function OverviewScreen({
+  navigation,
+  route,
+}: TabScreenProps<'OverviewScreen'>) {
   let data: QuizWalk = getData(0);
 
   const { quiz, answerQuestion, setQuizWalk } = useQuiz();

@@ -6,10 +6,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import MapView from 'react-native-maps';
 import { RootTabsParamList } from '../App';
 import { getData, QuizWalk } from '../data/data';
+import { TabScreenProps } from '../navigators/TabNavigator';
 
 type Props = NativeStackScreenProps<RootTabsParamList, 'Map'>;
 
-export default function MapScreen({ navigation, route }: Props) {
+export default function MapScreen({
+  navigation,
+  route,
+}: TabScreenProps<'MapScreen'>) {
   //data = XXX.fetch(route.params.quizWalkId);
   let data: QuizWalk = getData(0);
 
