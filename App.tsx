@@ -7,6 +7,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import QuizProvider from './context/QuizContext';
 
 import MapScreen from './screens/MapScreen';
 import LoginScreen from './screens/LoginScreen';
@@ -40,66 +41,68 @@ const RootTabs = createBottomTabNavigator<RootTabsParamList>();
 export default function App() {
   return (
     <SafeAreaProvider>
-      <NavigationContainer>
-        <StatusBar style="light" />
-        {/* <NativeStack.Navigator> */}
-        <RootTabs.Navigator
-          initialRouteName="Login"
-          screenOptions={{
-            headerShown: false,
-            headerTintColor: 'white',
-          }}
-        >
-          <RootTabs.Screen
-            name="Login"
-            component={LoginScreen}
-            options={{
-              tabBarIcon: ({ size, color }) => (
-                <MaterialIcons name="home" size={size} color={color} />
-              ),
-              // tabBarStyle: { display: 'none' },
+      <QuizProvider>
+        <NavigationContainer>
+          <StatusBar style="light" />
+          {/* <NativeStack.Navigator> */}
+          <RootTabs.Navigator
+            initialRouteName="Login"
+            screenOptions={{
+              headerShown: false,
+              headerTintColor: 'white',
             }}
-          />
+          >
+            <RootTabs.Screen
+              name="Login"
+              component={LoginScreen}
+              options={{
+                tabBarIcon: ({ size, color }) => (
+                  <MaterialIcons name="home" size={size} color={color} />
+                ),
+                // tabBarStyle: { display: 'none' },
+              }}
+            />
 
-          <RootTabs.Screen
-            name="Map"
-            component={MapScreen}
-            options={{
-              tabBarIcon: ({ size, color }) => (
-                <MaterialIcons name="home" size={size} color={color} />
-              ),
-            }}
-          />
-          <RootTabs.Screen
-            name="Question"
-            component={QuestionScreen}
-            options={{
-              tabBarIcon: ({ size, color }) => (
-                <MaterialIcons name="home" size={size} color={color} />
-              ),
-            }}
-          />
-          <RootTabs.Screen
-            name="Results"
-            component={ResultsScreen}
-            options={{
-              tabBarIcon: ({ size, color }) => (
-                <MaterialIcons name="home" size={size} color={color} />
-              ),
-            }}
-          />
-          <RootTabs.Screen
-            name="Overview"
-            component={OverviewScreen}
-            options={{
-              tabBarIcon: ({ size, color }) => (
-                <MaterialIcons name="home" size={size} color={color} />
-              ),
-            }}
-          />
-        </RootTabs.Navigator>
-        {/* </NativeStack.Navigator> */}
-      </NavigationContainer>
+            <RootTabs.Screen
+              name="Map"
+              component={MapScreen}
+              options={{
+                tabBarIcon: ({ size, color }) => (
+                  <MaterialIcons name="home" size={size} color={color} />
+                ),
+              }}
+            />
+            <RootTabs.Screen
+              name="Question"
+              component={QuestionScreen}
+              options={{
+                tabBarIcon: ({ size, color }) => (
+                  <MaterialIcons name="home" size={size} color={color} />
+                ),
+              }}
+            />
+            <RootTabs.Screen
+              name="Results"
+              component={ResultsScreen}
+              options={{
+                tabBarIcon: ({ size, color }) => (
+                  <MaterialIcons name="home" size={size} color={color} />
+                ),
+              }}
+            />
+            <RootTabs.Screen
+              name="Overview"
+              component={OverviewScreen}
+              options={{
+                tabBarIcon: ({ size, color }) => (
+                  <MaterialIcons name="home" size={size} color={color} />
+                ),
+              }}
+            />
+          </RootTabs.Navigator>
+          {/* </NativeStack.Navigator> */}
+        </NavigationContainer>
+      </QuizProvider>
     </SafeAreaProvider>
   );
 }
