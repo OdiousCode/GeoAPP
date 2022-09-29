@@ -8,7 +8,7 @@ Erik Jakobsson
 
 Jimmie Kleman
  
-Hampus Andersson ##
+Hampus Andersson 
 
 # Våra avgränsningar #
 
