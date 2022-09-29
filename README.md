@@ -1,3 +1,41 @@
+# GeoAPP (Name pending)
+
+## Projektmedlemmar 
+
+Görgen Andersson
+
+Erik Jakobsson
+
+Jimmie Kleman
+ 
+Hampus Andersson ##
+
+# Våra avgränsningar #
+
+# Komponenter vi har nyttjat #
+
+## React-native komponenter ##
+
+- React-Navigation
+- View
+- Text
+- Image
+- Textinput
+- Button
+
+## Expo komponenter ##
+
+- MapView
+- Pedometer (tbi)
+- Location (tbi)
+- Font (tbi)
+- Notification (tbi)
+- Audio (tbi)
+
+## Extern komponent ##
+
+- styled components (tbi)
+
 # GeoAPP
 I den här laborationen ska ni i grupp om tre skapa en nativ app med med hjälp av React
 Native (RN), Expo och Typescript. Vad ni väljer att skapa är valfritt däremot ska ni
