@@ -1,6 +1,7 @@
+import { MaterialIcons } from '@expo/vector-icons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { Button, StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import MapView from 'react-native-maps';
 import { RootTabsParamList } from '../App';
 import { getData, QuizWalk } from '../data/data';
@@ -10,7 +11,6 @@ type Props = NativeStackScreenProps<RootTabsParamList, 'Map'>;
 export default function MapScreen({ navigation, route }: Props) {
   //data = XXX.fetch(route.params.quizWalkId);
   let data: QuizWalk = getData(0);
-  console.log(data);
 
   return (
     <View style={styles.container}>
@@ -23,8 +23,16 @@ export default function MapScreen({ navigation, route }: Props) {
           longitudeDelta: 0.0421,
         }}
       />
+      <Text style={styles.routeTitle}>{data.title}</Text>
 
-      <Button title="Gå tillbaka" onPress={() => navigation.goBack()} />
+      <View style={styles.legendItem}>
+        <MaterialIcons name="circle" size={24} color="green" />
+        <Text>Besvarade frågor: ?/?</Text>
+      </View>
+      <View style={styles.legendItem}>
+        <MaterialIcons name="circle" size={24} color="red" />
+        <Text>Oupptäckta frågor: ?/?</Text>
+      </View>
     </View>
   );
 }
@@ -32,18 +40,27 @@ export default function MapScreen({ navigation, route }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    backgroundColor: '#adadad',
   },
   map: {
-    width: '100%',
-    height: '60%',
-    marginBottom: 20,
+    width: Dimensions.get('window').width,
+    height: '80%',
+  },
+  routeTitle: {
+    fontSize: 26,
+    textAlign: 'left',
+  },
+  legendItem: {
+    flex: 1,
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginLeft: 20,
   },
 
-  logo: {
+  /* logo: {
     width: 305,
     height: 159,
+      <View >
     marginBottom: 10,
   },
   instructions: {
@@ -59,5 +76,5 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 20,
     color: '#fff',
-  },
+  }, */
 });
