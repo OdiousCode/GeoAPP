@@ -2,16 +2,50 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { RootTabsParamList } from '../App';
+import { useQuiz } from '../context/QuizContext';
+import { getData, QuizWalk } from '../data/data';
 
 type Props = NativeStackScreenProps<RootTabsParamList, 'Overview'>;
 
 export default function OverviewScreen({ navigation, route }: Props) {
+  let data: QuizWalk = getData(0);
+
+  const { quiz, answerQuestion, setQuizWalk } = useQuiz();
+
   return (
     <View style={styles.container}>
-      <Text>Overview </Text>
-      <Button title="Gå tillbaka" onPress={() => navigation.goBack()} />
+      <Text> Quiz # {data.title}</Text>
+      <Text> Frågor </Text>
+
+      <Text>
+        Frågor besvarade {quiz.answers.length} / {data.questions.length}
+      </Text>
+
+      {/* Behöver Datan ifrån context här å sen mappa ut den */}
+
+      <Button
+        title="Lämna in"
+        onPress={() => {
+          // saveTableToContext();
+          // navigation.navigate('Results');
+          //setQuizWalk(data);
+          answerQuestion(1, 1);
+          console.log(quiz.answers);
+          console.log(quiz.activeQuiz.questions[1].correctAnswer);
+        }}
+      />
     </View>
   );
+}
+
+function saveTableToContext() {
+  let data: QuizWalk = getData(0);
+  // const { quiz, answerQuestion, setQuizWalk } = useQuiz();
+
+  // console.log('save Data');
+  // setQuizWalk(data);
+  // answerQuestion(1, 2);
+  // console.log(quiz);
 }
 
 const styles = StyleSheet.create({

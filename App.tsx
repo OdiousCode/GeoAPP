@@ -7,6 +7,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import QuizProvider from './context/QuizContext';
 
 import MapScreen from './screens/MapScreen';
 import LoginScreen from './screens/LoginScreen';
@@ -45,6 +46,7 @@ export default function App() {
 
   return (
     <SafeAreaProvider style={{ backgroundColor: coltheme.background }}>
+     <QuizProvider>
       <NavigationContainer>
         <StatusBar style="light" />
         {/* <NativeStack.Navigator> */}
@@ -68,8 +70,17 @@ export default function App() {
               ),
               // tabBarStyle: { display: 'none' },
             }}
-          />
-
+          >
+            <RootTabs.Screen
+              name="Login"
+              component={LoginScreen}
+              options={{
+                tabBarIcon: ({ size, color }) => (
+                  <MaterialIcons name="home" size={size} color={color} />
+                ),
+                // tabBarStyle: { display: 'none' },
+              }}
+            />
           <RootTabs.Screen
             name="Map"
             component={MapScreen}
@@ -118,6 +129,7 @@ export default function App() {
         </RootTabs.Navigator>
         {/* </NativeStack.Navigator> */}
       </NavigationContainer>
+     </QuizProvider>
     </SafeAreaProvider>
   );
 }
