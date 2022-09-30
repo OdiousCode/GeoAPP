@@ -2,7 +2,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootTabsParamList } from '../App';
 import { coltheme } from '../components/coltheme';
@@ -25,17 +25,28 @@ export default function MapScreen({ navigation, route }: Props) {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
-      />
+      >
+        <Marker
+          coordinate={{ latitude: 57.7, longitude: 12.9 }}
+          image={require('../assets/marker_not_discovered.png')}
+        />
+        <Marker
+          coordinate={{ latitude: 57.705, longitude: 12.89 }}
+          image={require('../assets/marker_discovered.png')}
+        />
+      </MapView>
 
-      <BigText>{data.title}</BigText>
+      <BigText textStyles={{ color: coltheme.cyan }}>{data.title}</BigText>
 
       <View style={styles.legendItem}>
         <MaterialIcons name="circle" size={24} color={coltheme.green} />
-        <SmallText>Besvarade frågor: ?/?</SmallText>
+        <SmallText textStyles={{ margin: 10 }}>Besvarade frågor: ?/?</SmallText>
       </View>
       <View style={styles.legendItem}>
         <MaterialIcons name="circle" size={24} color={coltheme.red} />
-        <SmallText>Oupptäckta frågor: ?/?</SmallText>
+        <SmallText textStyles={{ margin: 10 }}>
+          Oupptäckta frågor: ?/?
+        </SmallText>
       </View>
     </SafeAreaView>
   );
