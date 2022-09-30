@@ -27,13 +27,43 @@ export default function MapScreen({ navigation, route }: Props) {
         }}
       >
         <Marker
-          coordinate={{ latitude: 57.7, longitude: 12.9 }}
-          image={require('../assets/marker_not_discovered.png')}
+          coordinate={{
+            latitude: data.questions[0].latitude,
+            longitude: data.questions[0].longitude,
+          }}
+          pinColor={coltheme.green}
+          title={data.questions[0].title}
+          description={data.questions[0].question}
         />
         <Marker
-          coordinate={{ latitude: 57.705, longitude: 12.89 }}
-          image={require('../assets/marker_discovered.png')}
+          coordinate={{
+            latitude: data.questions[1].latitude,
+            longitude: data.questions[1].longitude,
+          }}
+          pinColor={coltheme.red}
+          title={data.questions[1].title}
+          description={data.questions[1].question}
         />
+        {data.questions[2].isVisited ? (
+          <Marker
+            coordinate={{
+              latitude: data.questions[2].latitude,
+              longitude: data.questions[2].longitude,
+            }}
+            pinColor={coltheme.red}
+            title={data.questions[2].title}
+            description={data.questions[2].question}
+          />
+        ) : (
+          <Marker
+            coordinate={{
+              latitude: data.questions[2].latitude,
+              longitude: data.questions[2].longitude,
+            }}
+            pinColor={coltheme.red}
+            title={'?'}
+          />
+        )}
       </MapView>
 
       <BigText textStyles={{ color: coltheme.cyan }}>{data.title}</BigText>
