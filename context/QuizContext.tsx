@@ -1,5 +1,5 @@
 import React, { createContext, ReactNode, useContext, useState } from 'react';
-import { getData, QuizWalk as QuizWalk, QuizWalkQuestion } from '../data/data';
+import { QuizWalk } from '../data/data';
 
 interface QuizItem {
   activeQuiz: QuizWalk;
@@ -35,6 +35,8 @@ const initalState: ContextValue = {
           longitude: 0,
           question: '',
           title: '',
+          isVisited: false,
+          isAnswered: false,
         },
       ],
       title: '',
