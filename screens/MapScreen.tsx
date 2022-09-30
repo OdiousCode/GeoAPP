@@ -1,10 +1,12 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import MapView from 'react-native-maps';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootTabsParamList } from '../App';
+import { coltheme } from '../components/coltheme';
+import { BigText, SmallText } from '../components/TextTemplates';
 import { getData, QuizWalk } from '../data/data';
 
 type Props = NativeStackScreenProps<RootTabsParamList, 'Map'>;
@@ -14,7 +16,7 @@ export default function MapScreen({ navigation, route }: Props) {
   let data: QuizWalk = getData(0);
 
   return (
-    <SafeAreaView style={[styles.container]}>
+    <SafeAreaView style={styles.container}>
       <MapView
         style={styles.map}
         initialRegion={{
@@ -24,15 +26,16 @@ export default function MapScreen({ navigation, route }: Props) {
           longitudeDelta: 0.0421,
         }}
       />
-      <Text style={styles.routeTitle}>{data.title}</Text>
+
+      <BigText>{data.title}</BigText>
 
       <View style={styles.legendItem}>
-        <MaterialIcons name="circle" size={24} color="green" />
-        <Text>Besvarade frågor: ?/?</Text>
+        <MaterialIcons name="circle" size={24} color={coltheme.green} />
+        <SmallText>Besvarade frågor: ?/?</SmallText>
       </View>
       <View style={styles.legendItem}>
-        <MaterialIcons name="circle" size={24} color="red" />
-        <Text>Oupptäckta frågor: ?/?</Text>
+        <MaterialIcons name="circle" size={24} color={coltheme.red} />
+        <SmallText>Oupptäckta frågor: ?/?</SmallText>
       </View>
     </SafeAreaView>
   );
@@ -41,7 +44,7 @@ export default function MapScreen({ navigation, route }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#adadad',
+    backgroundColor: coltheme.background,
   },
   map: {
     width: Dimensions.get('window').width,
@@ -49,7 +52,6 @@ const styles = StyleSheet.create({
   },
   routeTitle: {
     fontSize: 26,
-    textAlign: 'left',
   },
   legendItem: {
     flex: 1,
