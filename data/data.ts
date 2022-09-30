@@ -51,7 +51,7 @@ const mockQuizWalks: QuizWalk[] = [
         longitude: 12.947278,
         answers: ['abc', 'bca', 'cba'],
         correctAnswer: 2,
-        isVisited: true,
+        isVisited: false,
         isAnswered: false,
       },
     ],

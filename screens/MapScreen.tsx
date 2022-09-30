@@ -15,6 +15,23 @@ export default function MapScreen({ navigation, route }: Props) {
   //data = XXX.fetch(route.params.quizWalkId);
   let data: QuizWalk = getData(0);
 
+  const totalQuestions = data.questions.length;
+
+  let unknownQuestions = 0;
+  data.questions.forEach((x) => {
+    if (!x.isVisited) unknownQuestions++;
+  });
+
+  let discoveredQuestions = 0;
+  data.questions.forEach((x) => {
+    if (x.isVisited) discoveredQuestions++;
+  });
+
+  let answeredQuestions = 0;
+  data.questions.forEach((x) => {
+    if (x.isAnswered) answeredQuestions++;
+  });
+
   return (
     <SafeAreaView style={styles.container}>
       <MapView
@@ -70,12 +87,15 @@ export default function MapScreen({ navigation, route }: Props) {
 
       <View style={styles.legendItem}>
         <MaterialIcons name="circle" size={24} color={coltheme.green} />
-        <SmallText textStyles={{ margin: 10 }}>Besvarade frågor: ?/?</SmallText>
+        <SmallText textStyles={{ margin: 10 }}>
+          Besvarade frågor: {answeredQuestions}/{discoveredQuestions}
+        </SmallText>
       </View>
       <View style={styles.legendItem}>
         <MaterialIcons name="circle" size={24} color={coltheme.red} />
         <SmallText textStyles={{ margin: 10 }}>
-          Oupptäckta frågor: ?/?
+          Oupptäckta frågor: {totalQuestions - discoveredQuestions}/
+          {totalQuestions}
         </SmallText>
       </View>
     </SafeAreaView>
