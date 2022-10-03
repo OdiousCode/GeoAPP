@@ -14,11 +14,16 @@ import MapScreen from '../screens/MapScreen';
 import HomeScreen from '../screens/HomeScreen';
 // import HomeStackNavigator, { HomeStackParamList } from './HomeStackNavigator';
 import { RootStackParamList } from './RootStackNavigator';
+import HomeStackNavigator, {
+  HomeStackParamList,
+} from './QuestionStackNavigator';
 
 export type TabParamList = {
   HomeScreen: undefined;
   MapScreen: undefined;
   OverviewScreen: undefined;
+  QuestionStackNavigator: NavigatorScreenParams<HomeStackParamList>;
+  // TabNavigator: NavigatorScreenParams<TabParamList>;
 };
 // export type TabParamList = {
 //   HomeTab: NavigatorScreenParams<HomeStackParamList>;
@@ -36,13 +41,12 @@ const Tab = createBottomTabNavigator<TabParamList>();
 
 export default function TabNavigator() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen
         name="HomeScreen"
         component={HomeScreen}
         options={{
           title: 'Home',
-          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="home" size={size} color={color} />
           ),
@@ -66,6 +70,14 @@ export default function TabNavigator() {
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="person" size={size} color={color} />
           ),
+        }}
+      />
+      <Tab.Screen
+        name="QuestionStackNavigator"
+        component={HomeStackNavigator}
+        options={{
+          headerShown: false,
+          tabBarStyle: { display: 'none' },
         }}
       />
     </Tab.Navigator>

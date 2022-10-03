@@ -25,7 +25,7 @@ export default function LoginScreen({
       </View>
       <RegularButton
         onPress={() => {
-          navigation.navigate();
+          navigation.navigate('TabNavigator', { screen: 'HomeScreen' });
         }}
       >
         {' '}

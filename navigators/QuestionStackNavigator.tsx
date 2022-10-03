@@ -26,7 +26,7 @@ const Stack = createNativeStackNavigator<HomeStackParamList>();
 
 export default function HomeStackNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="QuestionScreen" component={QuestionScreen} />
       <Stack.Screen name="ResultScreen" component={ResultScreen} />
     </Stack.Navigator>

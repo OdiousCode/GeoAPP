@@ -31,13 +31,26 @@ export default function HomeScreen({
       <View style={{ margin: 10 }}>
         <SmallText>Antal steg: 4481</SmallText>
       </View>
-      <SmallText>hej</SmallText>
       <View style={styles.buttonContainer}>
         <RegularButton
           btnStyles={{ width: 100 }}
-          onPress={() => navigation.goBack()}
+          onPress={() =>
+            navigation.navigate('QuestionStackNavigator', {
+              screen: 'QuestionScreen',
+            })
+          }
         >
           Lämna in
+        </RegularButton>
+        <RegularButton
+          btnStyles={{ width: 100 }}
+          onPress={() =>
+            navigation.navigate('QuestionStackNavigator', {
+              screen: 'ResultScreen',
+            })
+          }
+        >
+          Resultat
         </RegularButton>
       </View>
     </SafeAreaView>
