@@ -77,7 +77,7 @@ export default function TabNavigator() {
         component={HomeStackNavigator}
         options={{
           headerShown: false,
-          tabBarStyle: { display: 'none' },
+          tabBarButton: () => null,
         }}
       />
     </Tab.Navigator>
