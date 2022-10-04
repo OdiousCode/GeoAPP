@@ -14,15 +14,16 @@ import MapScreen from '../screens/MapScreen';
 import HomeScreen from '../screens/HomeScreen';
 // import HomeStackNavigator, { HomeStackParamList } from './HomeStackNavigator';
 import { RootStackParamList } from './RootStackNavigator';
-import HomeStackNavigator, {
-  HomeStackParamList,
+import QuestionStackNavigator, {
+  QuestionStackParamList,
 } from './QuestionStackNavigator';
+import { coltheme } from '../components/coltheme';
 
 export type TabParamList = {
   HomeScreen: undefined;
   MapScreen: undefined;
   OverviewScreen: undefined;
-  QuestionStackNavigator: NavigatorScreenParams<HomeStackParamList>;
+  QuestionStackNavigator: NavigatorScreenParams<QuestionStackParamList>;
   // TabNavigator: NavigatorScreenParams<TabParamList>;
 };
 // export type TabParamList = {
@@ -41,12 +42,24 @@ const Tab = createBottomTabNavigator<TabParamList>();
 
 export default function TabNavigator() {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        headerTintColor: coltheme.background,
+        tabBarActiveTintColor: coltheme.white,
+        tabBarInactiveTintColor: coltheme.purple,
+        tabBarActiveBackgroundColor: coltheme.secondary,
+        tabBarInactiveBackgroundColor: coltheme.primary,
+        tabBarStyle: {
+          borderTopColor: coltheme.background,
+        },
+      }}
+    >
       <Tab.Screen
         name="HomeScreen"
         component={HomeScreen}
         options={{
-          title: 'Home',
+          title: 'Hem',
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="home" size={size} color={color} />
           ),
@@ -56,9 +69,9 @@ export default function TabNavigator() {
         name="MapScreen"
         component={MapScreen}
         options={{
-          title: 'Profile',
+          title: 'Karta',
           tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="person" size={size} color={color} />
+            <MaterialIcons name="maps-ugc" size={size} color={color} />
           ),
         }}
       />
@@ -66,18 +79,14 @@ export default function TabNavigator() {
         name="OverviewScreen"
         component={OverviewScreen}
         options={{
-          title: 'Profile',
+          title: 'Lista av frågor',
           tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="person" size={size} color={color} />
+            <MaterialIcons
+              name="format-list-numbered"
+              size={size}
+              color={color}
+            />
           ),
-        }}
-      />
-      <Tab.Screen
-        name="QuestionStackNavigator"
-        component={HomeStackNavigator}
-        options={{
-          headerShown: false,
-          tabBarButton: () => null,
         }}
       />
     </Tab.Navigator>

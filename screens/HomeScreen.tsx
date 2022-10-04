@@ -42,21 +42,23 @@ export default function HomeScreen({
           btnStyles={{ width: 100 }}
           onPress={() =>
             navigation.navigate('QuestionStackNavigator', {
-              screen: 'ResultScreen',
+              screen: 'ResultScreen', initial: true,
             })
           }
         >
           Lämna in
         </RegularButton>
         <RegularButton
-          btnStyles={{ width: 100 }}
+          btnStyles={{ width: 200, backgroundColor: coltheme.red}}
           onPress={() =>
             navigation.navigate('QuestionStackNavigator', {
+              initial: true,
               screen: 'QuestionScreen',
+              params: { id: 21 },
             })
           }
         >
-          QuestionScreen
+          Try access invalid question
         </RegularButton>
       </View>
     </SafeAreaView>

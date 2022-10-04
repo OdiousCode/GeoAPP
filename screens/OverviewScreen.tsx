@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
 import { RootTabsParamList } from '../App';
 import RegularButton from '../components/RegularButton';
 import { coltheme } from '../components/coltheme';
@@ -62,7 +62,19 @@ export default function OverviewScreen({
           if (prop.isVisited) {
             // this quiz is found
             // {quiz.answers.find((q) => q.id == prop.id)?.answer}
-            return <MediumText>#{prop.id} / TEMP A / Det var en...</MediumText>;
+
+            return (
+              <Pressable
+                onPress={() => {
+                  navigation.navigate('QuestionStackNavigator', {
+                    screen: 'QuestionScreen',
+                    params: { id: prop.id },
+                  });
+                }}
+              >
+                <MediumText>#{prop.id} / TEMP A / Det var en...</MediumText>
+              </Pressable>
+            );
           } else {
             return <MediumText> ?? / ? / ?????</MediumText>;
           }
