@@ -1,16 +1,17 @@
 # GeoAPP (Name pending)
 
 ## Projektmedlemmar 
+[Görgen Andersson](https://github.com/OdiousCode/)
 
-Görgen Andersson
+[Erik Jakobsson](https://github.com/Serover)
 
-Erik Jakobsson
+[Jimmie Kleman](https://github.com/CmdrMaylee)
 
-Jimmie Kleman
- 
-Hampus Andersson 
+[Hampus Andersson](https://github.com/HampusAndersson01)
 
 # Våra avgränsningar #
+
+Vi har valt att hålla oss till en färdig förkodad quiz, medans tanken var att man ska kunna skapa egna quizes som t.ex en Administratör.
 
 # Komponenter vi har nyttjat #
 
