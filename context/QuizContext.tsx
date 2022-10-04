@@ -1,5 +1,5 @@
 import React, { createContext, ReactNode, useContext, useState } from 'react';
-import { getData, QuizWalk as QuizWalk, QuizWalkQuestion } from '../data/data';
+import { QuizWalk } from '../data/data';
 
 interface QuizItem {
   activeQuiz: QuizWalk;
@@ -16,6 +16,7 @@ interface ContextValue {
   quiz: QuizItem;
   setQuizWalk: (product: QuizWalk) => void;
   answerQuestion: (id: number, answer: number) => void;
+  setSteps: (steps: number) => void;
 }
 
 interface Props {
@@ -35,6 +36,8 @@ const initalState: ContextValue = {
           longitude: 0,
           question: '',
           title: '',
+          isVisited: false,
+          isAnswered: false,
         },
       ],
       title: '',
@@ -44,6 +47,7 @@ const initalState: ContextValue = {
   },
   setQuizWalk: () => {},
   answerQuestion: () => {},
+  setSteps: () => {},
 };
 
 const QuizContext = createContext<ContextValue>(initalState);
@@ -81,8 +85,28 @@ function QuizProvider({ children }: Props) {
     });
   };
 
+  const setSteps = (amountOfSteps: number) => {
+    setQuiz((state): QuizItem => {
+      const stateCopy = state;
+      let copycopy = { ...stateCopy };
+
+      const updatedQuizItem: QuizItem = {
+        ...state,
+        steps: amountOfSteps,
+      };
+
+      return updatedQuizItem;
+    });
+    //  const stateCopy = state;
+    //  let copycopy = { ...stateCopy };
+    // let item: QuizItem = { activeQuiz: activeQuiz, answers: [], steps: 0 };
+    // setQuiz(item);
+  };
+
   return (
-    <QuizContext.Provider value={{ quiz, setQuizWalk, answerQuestion }}>
+    <QuizContext.Provider
+      value={{ quiz, setQuizWalk, answerQuestion, setSteps }}
+    >
       {children}
     </QuizContext.Provider>
   );

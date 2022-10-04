@@ -1,20 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { MaterialIcons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import QuizProvider from './context/QuizContext';
 
-import MapScreen from './screens/MapScreen';
+import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
+import MapScreen from './screens/MapScreen';
+import OverviewScreen from './screens/OverviewScreen';
 import QuestionScreen from './screens/QuestionScreen';
 import ResultsScreen from './screens/ResultsScreen';
-import OverviewScreen from './screens/OverviewScreen';
-import HomeScreen from './screens/HomeScreen';
 
 import { coltheme } from './components/coltheme';
 import Navigation from './navigators';
@@ -48,8 +45,10 @@ export default function App() {
   return (
     <SafeAreaProvider style={{ backgroundColor: coltheme.background }}>
       <QuizProvider>
+
         <StatusBar style="auto"></StatusBar>
         <Navigation></Navigation>
+
       </QuizProvider>
     </SafeAreaProvider>
   );
