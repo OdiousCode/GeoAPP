@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
 import { RootTabsParamList } from '../App';
 import RegularButton from '../components/RegularButton';
 import { coltheme } from '../components/coltheme';
@@ -9,6 +9,7 @@ import { useQuiz } from '../context/QuizContext';
 import { getData, QuizWalk } from '../data/data';
 import { TabScreenProps } from '../navigators/TabNavigator';
 import { BigText, MediumText, SmallText } from '../components/TextTemplates';
+import { ThemeConsumer } from 'styled-components/native';
 
 type Props = NativeStackScreenProps<RootTabsParamList, 'Overview'>;
 
@@ -62,7 +63,20 @@ export default function OverviewScreen({
           if (prop.isVisited) {
             // this quiz is found
             // {quiz.answers.find((q) => q.id == prop.id)?.answer}
-            return <MediumText>#{prop.id} / TEMP A / Det var en...</MediumText>;
+            return (
+              <Pressable
+                onPress={() => {
+                  navigation.navigate('QuestionStackNavigator', {
+                    screen: 'QuestionScreen',
+                    params: { id: prop.id },
+                  });
+                }}
+              >
+                <MediumText textStyles={{ color: coltheme.cyan }}>
+                  #{prop.id} / TEMP A / Det var en...
+                </MediumText>
+              </Pressable>
+            );
           } else {
             return <MediumText> ?? / ? / ?????</MediumText>;
           }

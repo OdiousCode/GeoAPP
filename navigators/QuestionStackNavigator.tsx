@@ -12,7 +12,7 @@ import ResultScreen from '../screens/ResultsScreen';
 import { TabScreenProps } from './TabNavigator';
 
 export type HomeStackParamList = {
-  QuestionScreen: undefined;
+  QuestionScreen: { id: number };
   ResultScreen: undefined;
 };
 
