@@ -17,6 +17,7 @@ import { RootStackParamList } from './RootStackNavigator';
 import HomeStackNavigator, {
   HomeStackParamList,
 } from './QuestionStackNavigator';
+import { coltheme } from '../components/coltheme';
 
 export type TabParamList = {
   HomeScreen: undefined;
@@ -41,7 +42,19 @@ const Tab = createBottomTabNavigator<TabParamList>();
 
 export default function TabNavigator() {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        headerTintColor: coltheme.background,
+        tabBarActiveTintColor: coltheme.pink,
+        tabBarInactiveTintColor: coltheme.purple,
+        tabBarActiveBackgroundColor: coltheme.secondary,
+        tabBarInactiveBackgroundColor: coltheme.primary,
+        tabBarStyle: {
+          borderTopColor: coltheme.background,
+        },
+      }}
+    >
       <Tab.Screen
         name="HomeScreen"
         component={HomeScreen}
