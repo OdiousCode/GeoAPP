@@ -6,6 +6,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootTabsParamList } from '../App';
 import { coltheme } from '../components/coltheme';
 import RegularButton from '../components/RegularButton';
+import { useQuiz } from '../context/QuizContext';
+import { getData } from '../data/data';
+import subscribeToLocation from '../hooks/LocationSub';
+import SubscribeToSteps from '../hooks/Pedometer';
 import { RootStackParamList } from '../navigators/RootStackNavigator';
 
 type Props = NativeStackScreenProps<RootTabsParamList, 'Login'>;
@@ -14,29 +18,34 @@ export default function LoginScreen({
   navigation,
   route,
 }: RootStackParamList<'Login'>) {
+  const { quiz, answerQuestion, setQuizWalk } = useQuiz();
+  subscribeToLocation();
+  SubscribeToSteps();
   return (
     <SafeAreaView style={[styles.container]}>
       <Image source={require('../assets/geoappsplash.png')}></Image>
       <View style={{ margin: 10 }}>
         <Text style={[styles.bigText]}>TipsPROmenader 2000</Text>
       </View>
-      <View style={{ margin: 2 }}>
+      {/* <View style={{ margin: 2 }}>
         <TextInput style={[styles.smallText]}>Ange kod här</TextInput>
-      </View>
+      </View> */}
       <RegularButton
         onPress={() => {
+          let data = getData(0);
+          setQuizWalk(data);
           navigation.navigate('TabNavigator', { screen: 'HomeScreen' });
         }}
       >
         {' '}
         Logga in
       </RegularButton>
-      <View style={{ margin: 2 }}>
+      {/* <View style={{ margin: 2 }}>
         <Text style={[styles.smallText]}>Skapa en quiz?</Text>
-      </View>
-      <View style={{ margin: 2 }}>
+      </View> */}
+      {/* <View style={{ margin: 2 }}>
         <Button color={coltheme.purple} title="Skapa quiz" />
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 }

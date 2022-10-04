@@ -8,6 +8,7 @@ import { BigText, SmallText } from '../components/TextTemplates';
 import { coltheme } from '../components/coltheme';
 import RegularButton from '../components/RegularButton';
 import { TabScreenProps } from '../navigators/TabNavigator';
+import { useQuiz } from '../context/QuizContext';
 
 type Props = NativeStackScreenProps<RootTabsParamList, 'Home'>;
 
@@ -15,7 +16,7 @@ export default function HomeScreen({
   navigation,
   route,
 }: TabScreenProps<'HomeScreen'>) {
-  let data: QuizWalk = getData(0);
+  const { quiz, answerQuestion, setQuizWalk } = useQuiz();
   return (
     <SafeAreaView style={[styles.container]}>
       <Image
@@ -23,10 +24,15 @@ export default function HomeScreen({
         resizeMode={'cover'}
       ></Image>
       <View style={{ margin: 10 }}>
-        <BigText textStyles={{ color: coltheme.pink }}>{data.title}</BigText>
+        <BigText textStyles={{ color: coltheme.pink }}>
+          {quiz.activeQuiz.title}
+        </BigText>
       </View>
       <View style={{ margin: 10 }}>
-        <SmallText>Du har besvarat 7/10 frågor.</SmallText>
+        <SmallText>
+          Du har besvarat {quiz.answers.length}/
+          {quiz.activeQuiz.questions.length} frågor.
+        </SmallText>
       </View>
       <View style={{ margin: 10 }}>
         <SmallText>Antal steg: 4481</SmallText>

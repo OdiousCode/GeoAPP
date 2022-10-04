@@ -10,14 +10,13 @@ import { getData, QuizWalk } from '../data/data';
 import { TabScreenProps } from '../navigators/TabNavigator';
 import { BigText, MediumText, SmallText } from '../components/TextTemplates';
 
-
 type Props = NativeStackScreenProps<RootTabsParamList, 'Overview'>;
 
 export default function OverviewScreen({
   navigation,
   route,
 }: TabScreenProps<'OverviewScreen'>) {
-  let data: QuizWalk = getData(0);
+  // let data: QuizWalk = getData(0);
 
   const { quiz, answerQuestion, setQuizWalk } = useQuiz();
 
@@ -39,7 +38,9 @@ export default function OverviewScreen({
   return (
     <SafeAreaView style={[styles.container]}>
       <View style={{ margin: 10 }}>
-        <BigText textStyles={{ color: coltheme.pink }}>{data.title}</BigText>
+        <BigText textStyles={{ color: coltheme.pink }}>
+          {quiz.activeQuiz.title}
+        </BigText>
       </View>
       <View style={{ marginTop: 5, marginBottom: 35 }}>
         <BigText textStyles={{ color: coltheme.pink }}>Frågor</BigText>
@@ -47,7 +48,8 @@ export default function OverviewScreen({
 
       <View style={{ margin: 10 }}>
         <SmallText>
-          Frågor besvarade {quiz.answers.length} / {data.questions.length}
+          Frågor besvarade {quiz.answers.length} /{' '}
+          {quiz.activeQuiz.questions.length}
         </SmallText>
       </View>
 
