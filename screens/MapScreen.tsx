@@ -10,8 +10,6 @@ import { BigText, SmallText } from '../components/TextTemplates';
 import { getData, QuizWalk } from '../data/data';
 import { TabScreenProps } from '../navigators/TabNavigator';
 
-type Props = NativeStackScreenProps<RootTabsParamList, 'Map'>;
-
 export default function MapScreen({
   navigation,
   route,

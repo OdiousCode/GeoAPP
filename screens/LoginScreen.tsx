@@ -10,14 +10,12 @@ import { useQuiz } from '../context/QuizContext';
 import { getData } from '../data/data';
 import subscribeToLocation from '../hooks/LocationSub';
 import SubscribeToSteps from '../hooks/Pedometer';
-import { RootStackParamList } from '../navigators/RootStackNavigator';
-
-type Props = NativeStackScreenProps<RootTabsParamList, 'Login'>;
+import { RootScreenProps } from '../navigators/RootStackNavigator';
 
 export default function LoginScreen({
   navigation,
   route,
-}: RootStackParamList<'Login'>) {
+}: RootScreenProps<'Login'>) {
   const { quiz, answerQuestion, setQuizWalk } = useQuiz();
   subscribeToLocation();
   SubscribeToSteps();
