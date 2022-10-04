@@ -37,4 +37,18 @@ export const BigText: FunctionComponent<TextProps> = (props) => {
     <StyledBigText style={props.textStyles}>{props.children}</StyledBigText>
   );
 };
+
+const StyledMediumText = styled.Text`
+  font-size: 25px;
+  color: ${coltheme.white};
+  text-align: left;
+`;
+
+export const MediumText: FunctionComponent<TextProps> = (props) => {
+  return (
+    <StyledMediumText style={props.textStyles}>
+      {props.children}
+    </StyledMediumText>
+  );
+};
 // export default BigText;
