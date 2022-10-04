@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootTabsParamList } from '../App';
 import RegularButton from '../components/RegularButton';
 // import { Stack, Button } from '@react-native-material/core';
@@ -19,7 +20,7 @@ export default function ResultScreen({
   route,
 }: QuestionScreenProps<'ResultScreen'>) {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
         <Text style={styles.title}>Quiz: Skallegången</Text>
         <Text style={styles.title}>Resultat</Text>
@@ -42,7 +43,7 @@ export default function ResultScreen({
           Go back
         </RegularButton>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

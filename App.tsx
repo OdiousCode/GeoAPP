@@ -45,10 +45,8 @@ export default function App() {
   return (
     <SafeAreaProvider style={{ backgroundColor: coltheme.background }}>
       <QuizProvider>
-
-        <StatusBar style="auto"></StatusBar>
+        <StatusBar style="light"></StatusBar>
         <Navigation></Navigation>
-
       </QuizProvider>
     </SafeAreaProvider>
   );
