@@ -53,7 +53,7 @@ export default function HomeScreen({
           onPress={() =>
             navigation.navigate('QuestionStackNavigator', {
               screen: 'QuestionScreen',
-              params: {id: 1}
+              params: { id: 21 },
             })
           }
         >

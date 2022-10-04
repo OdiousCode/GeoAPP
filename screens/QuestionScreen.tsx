@@ -13,16 +13,26 @@ export default function QuestionScreen({
   route,
 }: QuestionScreenProps<'QuestionScreen'>) {
   const { quiz, answerQuestion, setQuizWalk } = useQuiz();
+  let quest = quiz.activeQuiz.questions.find((p) => p.id === route.params.id);
   let question = quiz.activeQuiz.questions[route.params.id];
-  return (
-    <View style={styles.container}>
-      <Text>
-        {question.id}
-        {question.title}{' '}
-      </Text>
-      <Button title="Gå tillbaka" onPress={() => navigation.goBack()} />
-    </View>
-  );
+  if (!quest) {
+    return (
+      <View style={styles.container}>
+        <Text>There is no question with that ID</Text>
+        <Button title="Gå tillbaka" onPress={() => navigation.goBack()} />
+      </View>
+    );
+  } else {
+    return (
+      <View style={styles.container}>
+        <Text>
+          {quest?.id}
+          {quest?.title}
+        </Text>
+        <Button title="Gå tillbaka" onPress={() => navigation.goBack()} />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
