@@ -16,25 +16,33 @@ Hampus Andersson
 
 ## React-native komponenter ##
 
-- React-Navigation
-- View
-- Text
-- Image
-- Textinput
-- Button
+- React-Navigation - Används för att navigera emellan olika sidor i appen.
+
+- View - Används flitigt, för att skapa sektioner på varje sida i appen, likt div i html.
+
+- Text - Används i samklang med styled components, för att skapa fördefinierade textfält med möjlighet att ta nya props. I vårt fall small-, medium- och bigtext.
+
+- Image - Används för att ladda in bilder på b.la välkomstsidan (login)
+
+- Pressable - Används bl.a för att göra varje fråga i listan av frågor till en länk till den specifika frågan.
+
+- TouchableOpacity - Våra fördefinierade "regularButton" med möjlighet att ta nya props, är en knapp skapad i kombination av TouchableOpacity och styled components.
 
 ## Expo komponenter ##
 
-- MapView
-- Pedometer (tbi)
-- Location (tbi)
-- Font (tbi)
-- Notification (tbi)
-- Audio (tbi)
+- MapView - Används för att rita vår vackra karta med markers för frågor.
+
+- Pedometer - Räknar stegen användaren tar åt oss.
+
+- Location - Används för att se vart användaren befinner sig, för att se om dom är nära en fråga och därmed "hittar" den specfika frågan.
+
+- Notification - Används för att notifiera användaren att dom nått positionen av en fråga.
+
+- StatusBar - Ser till att vår appliktion inte hamnar bakom telefonen "fasta" interface, i form av bakåt-knappar, batterimätare osv.
 
 ## Extern komponent ##
 
-- styled components (tbi)
+- styled components - Använder vi tillsammans med RN komponenten Text och TouchableOpacity, för att skapa våra egna fördefinierade knappar och texter i olika textstorlek med färger osv.
 
 # GeoAPP
 I den här laborationen ska ni i grupp om tre skapa en nativ app med med hjälp av React
@@ -58,9 +66,9 @@ presentationen innefatta en reflekterande del. Varje grupp har ca 20 min på sig
 
 ## Krav för godkänt: ##
 
-- [ ] Projektet använder minst 6 stycken RN-komponenter och minst 6 stycken Expo
+- [X] Projektet använder minst 6 stycken RN-komponenter och minst 6 stycken Expo
 komponenter.
-- [ ] De utvalda komponenterna ska antecknas i er README tillsammans med en lista över
+- [X] De utvalda komponenterna ska antecknas i er README tillsammans med en lista över
 genomförda krav.
 - [X] Git & GitHub har använts
 - [X] Projektmappen innehåller en README.md fil - (läs ovan för mer info)
@@ -71,6 +79,6 @@ genomförda krav.
 
 - [ ] Alla punkter för godkänt är uppfyllda
 - [X] React Navigation används för att skapa en bättre upplevelse i appen.
-- [ ] Ytterligare en valfri extern modul används i projektet.
+- [X] Ytterligare en valfri extern modul används i projektet.
 - [X] Prototyper för applikation tas fram innan den implementeras. Bilder på prototypen
 skall finnas i projektet vid inlämning.
