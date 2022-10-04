@@ -7,11 +7,16 @@ import { coltheme } from '../components/coltheme';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useQuiz } from '../context/QuizContext';
 import { getData, QuizWalk } from '../data/data';
+import { TabScreenProps } from '../navigators/TabNavigator';
 import { BigText, MediumText, SmallText } from '../components/TextTemplates';
+
 
 type Props = NativeStackScreenProps<RootTabsParamList, 'Overview'>;
 
-export default function OverviewScreen({ navigation, route }: Props) {
+export default function OverviewScreen({
+  navigation,
+  route,
+}: TabScreenProps<'OverviewScreen'>) {
   let data: QuizWalk = getData(0);
 
   const { quiz, answerQuestion, setQuizWalk } = useQuiz();

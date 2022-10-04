@@ -8,11 +8,16 @@ import {
   View,
 } from 'react-native';
 import { RootTabsParamList } from '../App';
-import { Stack, Button } from '@react-native-material/core';
+import RegularButton from '../components/RegularButton';
+// import { Stack, Button } from '@react-native-material/core';
+import { QuestionScreenProps } from '../navigators/QuestionStackNavigator';
 
 type Props = NativeStackScreenProps<RootTabsParamList, 'Results'>;
 
-export default function ResultScreen({ navigation, route }: Props) {
+export default function ResultScreen({
+  navigation,
+  route,
+}: QuestionScreenProps<'ResultScreen'>) {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -33,13 +38,9 @@ export default function ResultScreen({ navigation, route }: Props) {
         <Text style={styles.resultText}>Antal steg: 4471</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <Button
-          style={styles.backBtn}
-          variant="contained"
-          color="#ddd"
-          title="Back"
-          onPress={() => navigation.goBack()}
-        />
+        <RegularButton onPress={() => navigation.goBack()}>
+          Go back
+        </RegularButton>
       </View>
     </View>
   );

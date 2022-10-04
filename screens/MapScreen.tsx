@@ -8,10 +8,14 @@ import { RootTabsParamList } from '../App';
 import { coltheme } from '../components/coltheme';
 import { BigText, SmallText } from '../components/TextTemplates';
 import { getData, QuizWalk } from '../data/data';
+import { TabScreenProps } from '../navigators/TabNavigator';
 
 type Props = NativeStackScreenProps<RootTabsParamList, 'Map'>;
 
-export default function MapScreen({ navigation, route }: Props) {
+export default function MapScreen({
+  navigation,
+  route,
+}: TabScreenProps<'MapScreen'>) {
   //data = XXX.fetch(route.params.quizWalkId);
   let data: QuizWalk = getData(0);
 
