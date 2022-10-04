@@ -36,7 +36,7 @@ export default function HomeScreen({
           btnStyles={{ width: 100 }}
           onPress={() =>
             navigation.navigate('QuestionStackNavigator', {
-              screen: 'QuestionScreen',
+              screen: 'ResultScreen',
             })
           }
         >
@@ -46,11 +46,11 @@ export default function HomeScreen({
           btnStyles={{ width: 100 }}
           onPress={() =>
             navigation.navigate('QuestionStackNavigator', {
-              screen: 'ResultScreen',
+              screen: 'QuestionScreen',
             })
           }
         >
-          Resultat
+          QuestionScreen
         </RegularButton>
       </View>
     </SafeAreaView>
