@@ -1,5 +1,6 @@
 import React, { createContext, ReactNode, useContext, useState } from 'react';
 import { QuizWalk } from '../data/data';
+import useSubscribeToSteps from '../hooks/Pedometer';
 
 interface QuizItem {
   activeQuiz: QuizWalk;
@@ -16,7 +17,8 @@ interface ContextValue {
   quiz: QuizItem;
   setQuizWalk: (product: QuizWalk) => void;
   answerQuestion: (id: number, answer: number) => void;
-  setSteps: (steps: number) => void;
+  steps: number;
+  // setSteps: (steps: number) => void;
 }
 
 interface Props {
@@ -43,18 +45,21 @@ const initalState: ContextValue = {
       title: '',
     },
     answers: [],
-    steps: 0,
   },
   setQuizWalk: () => {},
   answerQuestion: () => {},
-  setSteps: () => {},
+  steps: 0,
+  // setSteps: () => {},
 };
 
 const QuizContext = createContext<ContextValue>(initalState);
 
 function QuizProvider({ children }: Props) {
-  const [quiz, setQuiz] = useState(initalState.quiz);
-
+  // const [quiz, setQuiz] = useState(initalState.quiz);
+  // Hook för location - Alternativt hela use effecten
+  const steps = useSubscribeToSteps();
+  const location = useLocation();
+  const [quiz, setQuiz] = useUpdatedQuiz(location, initalState.quiz);
   const setQuizWalk = (activeQuiz: QuizWalk) => {
     let item: QuizItem = { activeQuiz: activeQuiz, answers: [], steps: 0 };
     setQuiz(item);
@@ -104,9 +109,7 @@ function QuizProvider({ children }: Props) {
   };
 
   return (
-    <QuizContext.Provider
-      value={{ quiz, setQuizWalk, answerQuestion, setSteps }}
-    >
+    <QuizContext.Provider value={{ quiz, setQuizWalk, answerQuestion, steps }}>
       {children}
     </QuizContext.Provider>
   );

@@ -12,9 +12,10 @@ import { SmallText } from './TextTemplates';
 
 const ButtonView = styled.TouchableOpacity`
   align-items: center;
-  background-color: ${coltheme.orange};
+  background-color: ${coltheme.secondary};
   width: 100%;
   padding: 10px;
+  border: 2px solid ${coltheme.primary};
 `;
 
 interface ButtonProps {

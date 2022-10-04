@@ -24,9 +24,7 @@ export default function HomeScreen({
         resizeMode={'cover'}
       ></Image>
       <View style={{ margin: 10 }}>
-        <BigText textStyles={{ color: coltheme.pink }}>
-          {quiz.activeQuiz.title}
-        </BigText>
+        <BigText>{quiz.activeQuiz.title}</BigText>
       </View>
       <View style={{ margin: 10 }}>
         <SmallText>
@@ -43,13 +41,13 @@ export default function HomeScreen({
           onPress={() =>
             navigation.navigate('QuestionStackNavigator', {
               screen: 'ResultScreen',
-              initial: false,
+              initial: true,
             })
           }
         >
           Lämna in
         </RegularButton>
-        <RegularButton
+        {/* <RegularButton
           btnStyles={{ width: 200, backgroundColor: coltheme.red }}
           onPress={() =>
             navigation.navigate('QuestionStackNavigator', {
@@ -60,7 +58,7 @@ export default function HomeScreen({
           }
         >
           Try to access invalid question
-        </RegularButton>
+        </RegularButton> */}
       </View>
     </SafeAreaView>
   );

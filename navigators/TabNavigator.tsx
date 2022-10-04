@@ -14,8 +14,8 @@ import MapScreen from '../screens/MapScreen';
 import HomeScreen from '../screens/HomeScreen';
 // import HomeStackNavigator, { HomeStackParamList } from './HomeStackNavigator';
 import { RootStackParamList } from './RootStackNavigator';
-import HomeStackNavigator, {
-  HomeStackParamList,
+import QuestionStackNavigator, {
+  QuestionStackParamList,
 } from './QuestionStackNavigator';
 import { coltheme } from '../components/coltheme';
 
@@ -23,7 +23,7 @@ export type TabParamList = {
   HomeScreen: undefined;
   MapScreen: undefined;
   OverviewScreen: undefined;
-  QuestionStackNavigator: NavigatorScreenParams<HomeStackParamList>;
+  QuestionStackNavigator: NavigatorScreenParams<QuestionStackParamList>;
   // TabNavigator: NavigatorScreenParams<TabParamList>;
 };
 // export type TabParamList = {
@@ -46,7 +46,7 @@ export default function TabNavigator() {
       screenOptions={{
         headerShown: false,
         headerTintColor: coltheme.background,
-        tabBarActiveTintColor: coltheme.pink,
+        tabBarActiveTintColor: coltheme.white,
         tabBarInactiveTintColor: coltheme.purple,
         tabBarActiveBackgroundColor: coltheme.secondary,
         tabBarInactiveBackgroundColor: coltheme.primary,
@@ -87,14 +87,6 @@ export default function TabNavigator() {
               color={color}
             />
           ),
-        }}
-      />
-      <Tab.Screen
-        name="QuestionStackNavigator"
-        component={HomeStackNavigator}
-        options={{
-          headerShown: false,
-          tabBarButton: () => null,
         }}
       />
     </Tab.Navigator>

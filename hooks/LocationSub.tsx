@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 import * as Location from 'expo-location';
 import { schedulePushNotification } from './Notification';
 import { useQuiz } from '../context/QuizContext';
+import { QuizWalk } from '../data/data';
 
 // in KM
 const minDistanceToTrigger: number = 0.1;
 
-export default function subscribeToLocation() {
+export default function subscribeToLocation(quiz: QuizWalk) {
   // const [onceLocation, setLocation] = useState({});
   // const [errorMsg, setErrorMsg] = useState('');
   // const [foregroundPermission, setForeGroundPermission] = useState({});
-  const { quiz, answerQuestion, setQuizWalk } = useQuiz();
+  // const { quiz, answerQuestion, setQuizWalk } = useQuiz();
 
   useEffect(() => {
     (async () => {
@@ -63,7 +64,11 @@ export default function subscribeToLocation() {
       // setLocation(location);
       console.log(location);
     })();
+    return () => {
+      /*cleanup*/
+    };
   }, []);
+  return location; // alternativt quiz
 }
 
 function calcDistanceFromLongLat(

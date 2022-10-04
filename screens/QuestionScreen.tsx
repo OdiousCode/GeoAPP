@@ -1,6 +1,6 @@
 import { PanoramaSharp } from '@mui/icons-material';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { RootTabsParamList } from '../App';
 import { useQuiz } from '../context/QuizContext';
@@ -13,8 +13,9 @@ export default function QuestionScreen({
   route,
 }: QuestionScreenProps<'QuestionScreen'>) {
   const { quiz, answerQuestion, setQuizWalk } = useQuiz();
-  let quest = quiz.activeQuiz.questions.find((p) => p.id === route.params.id);
-  let question = quiz.activeQuiz.questions[route.params.id];
+  let quest = quiz.activeQuiz.questions.find((p) => p.id === route.params?.id);
+
+  // let question = quiz.activeQuiz.questions[route.params.id];
   if (!quest) {
     return (
       <View style={styles.container}>
