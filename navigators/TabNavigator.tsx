@@ -46,7 +46,7 @@ export default function TabNavigator() {
         name="HomeScreen"
         component={HomeScreen}
         options={{
-          title: 'Home',
+          title: 'Hem',
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="home" size={size} color={color} />
           ),
@@ -56,9 +56,9 @@ export default function TabNavigator() {
         name="MapScreen"
         component={MapScreen}
         options={{
-          title: 'Profile',
+          title: 'Karta',
           tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="person" size={size} color={color} />
+            <MaterialIcons name="maps-ugc" size={size} color={color} />
           ),
         }}
       />
@@ -66,9 +66,13 @@ export default function TabNavigator() {
         name="OverviewScreen"
         component={OverviewScreen}
         options={{
-          title: 'Profile',
+          title: 'Lista av frågor',
           tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="person" size={size} color={color} />
+            <MaterialIcons
+              name="format-list-numbered"
+              size={size}
+              color={color}
+            />
           ),
         }}
       />

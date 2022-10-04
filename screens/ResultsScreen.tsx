@@ -38,7 +38,7 @@ export default function ResultScreen({
         <Text style={styles.resultText}>Antal steg: 4471</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <RegularButton onPress={() => navigation.goBack()}>
+        <RegularButton onPress={() => navigation.navigate('Login')}>
           Go back
         </RegularButton>
       </View>
