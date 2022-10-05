@@ -50,7 +50,6 @@ export default function OverviewScreen({
             return (
               <Pressable
                 key={prop.id}
-
                 onPress={() => {
                   navigation.navigate('QuestionStackNavigator', {
                     screen: 'QuestionScreen',
@@ -61,7 +60,6 @@ export default function OverviewScreen({
                 <MediumText textStyles={{ color: coltheme.cyan }}>
                   #{prop.id} / TEMP A / Det var en...
                 </MediumText>
-
               </Pressable>
             );
           } else {
@@ -72,9 +70,9 @@ export default function OverviewScreen({
       {/* Behöver Datan ifrån context här å sen mappa ut den */}
       <RegularButton
         onPress={() => {
-          // saveTableToContext();
-          // navigation.navigate('Results');
-          //setQuizWalk(data);
+          navigation.navigate('QuestionStackNavigator', {
+            screen: 'ResultScreen',
+          });
         }}
       >
         Lämna in

@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { RootTabsParamList } from '../App';
 import RegularButton from '../components/RegularButton';
+import { useQuiz } from '../context/QuizContext';
 // import { Stack, Button } from '@react-native-material/core';
 import { QuestionScreenProps } from '../navigators/QuestionStackNavigator';
 
@@ -18,28 +19,47 @@ export default function ResultScreen({
   navigation,
   route,
 }: QuestionScreenProps<'ResultScreen'>) {
+  const { quiz, answerQuestion, setQuizWalk, steps } = useQuiz();
+
+  let correctAnswers = 0;
+  quiz.answers.forEach((element) => {
+    let questionInRelevence = quiz.activeQuiz.questions.find(
+      (q) => q.id === element.id
+    );
+    if (questionInRelevence) {
+      if (questionInRelevence.correctAnswer === element.answer)
+        correctAnswers++;
+    }
+  });
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Text style={styles.title}>Quiz: Skallegången</Text>
+        <Text style={styles.title}>Quiz: {quiz.activeQuiz.title}</Text>
         <Text style={styles.title}>Resultat</Text>
       </View>
       <View style={styles.boxContainer}>
         <Text style={styles.title}>Mina stats</Text>
-        <Text style={styles.resultText}>Deltagare: #27</Text>
-        <Text style={styles.resultText}>Antal steg: 2243</Text>
-        <Text style={styles.resultText}>Svar 6/7</Text>
-        <Text style={styles.resultText}>Rätt 4/6</Text>
+        <Text style={styles.resultText}>Deltagare: #??</Text>
+        <Text style={styles.resultText}>Antal steg: {steps}</Text>
+        <Text style={styles.resultText}>
+          Svar {quiz.answers.length} / {quiz.activeQuiz.questions.length}
+        </Text>
+        <Text style={styles.resultText}>
+          Rätt {correctAnswers} / {quiz.activeQuiz.questions.length}
+        </Text>
       </View>
-      <View style={styles.boxContainer}>
+
+      {/* WE DONT HAVE DATE FOR THIS YET */}
+      {/* <View style={styles.boxContainer}>
         <Text style={styles.title}>Genomsnitt</Text>
         <Text style={styles.resultText}>Deltagare: 34</Text>
         <Text style={styles.resultText}>Antal rätt: 4</Text>
         <Text style={styles.resultText}>Antal steg: 4471</Text>
-      </View>
+      </View> */}
       <View style={styles.buttonContainer}>
         <RegularButton onPress={() => navigation.navigate('Login')}>
-          Go back
+          EXIT
         </RegularButton>
       </View>
     </View>
