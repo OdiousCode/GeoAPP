@@ -16,7 +16,7 @@ export default function HomeScreen({
   navigation,
   route,
 }: TabScreenProps<'HomeScreen'>) {
-  const { quiz, answerQuestion, setQuizWalk } = useQuiz();
+  const { quiz, answerQuestion, setQuizWalk, answers } = useQuiz();
   return (
     <SafeAreaView style={[styles.container]}>
       <Image
@@ -24,12 +24,11 @@ export default function HomeScreen({
         resizeMode={'cover'}
       ></Image>
       <View style={{ margin: 10 }}>
-        <BigText>{quiz.activeQuiz.title}</BigText>
+        <BigText>{quiz.title}</BigText>
       </View>
       <View style={{ margin: 10 }}>
         <SmallText>
-          Du har besvarat {quiz.answers.length}/
-          {quiz.activeQuiz.questions.length} frågor.
+          Du har besvarat {answers.length}/{quiz.questions.length} frågor.
         </SmallText>
       </View>
       <View style={{ margin: 10 }}>
@@ -48,7 +47,7 @@ export default function HomeScreen({
           Lämna in
         </RegularButton>
         <RegularButton
-          btnStyles={{ width: 200, backgroundColor: coltheme.red}}
+          btnStyles={{ width: 200, backgroundColor: coltheme.red }}
           onPress={() =>
             navigation.navigate('QuestionStackNavigator', {
               initial: true,

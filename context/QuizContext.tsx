@@ -10,13 +10,8 @@ import useLocation, { calcDistanceFromLongLat } from '../hooks/LocationSub';
 import useSubscribeToSteps from '../hooks/Pedometer';
 import * as Location from 'expo-location';
 import { LocationObjectCoords } from 'expo-location';
-import { schedulePushNotification } from '../helper/functions/Notification';
-import { minDistanceToTrigger } from '../helper/constants/appSettings';
-
-interface QuizItem {
-  activeQuiz: QuizWalk;
-  answers: QuizAnswer[];
-}
+import { schedulePushNotification } from '../utils/functions/Notification';
+import { minDistanceToTrigger } from '../utils/constants/devSettings';
 
 interface QuizAnswer {
   id: number;
@@ -24,9 +19,12 @@ interface QuizAnswer {
 }
 
 interface ContextValue {
-  quiz: QuizItem;
+  quiz: QuizWalk;
+  answers: QuizAnswer[];
+  unlockedQuestions: number[];
   setQuizWalk: (product: QuizWalk) => void;
   answerQuestion: (id: number, answer: number) => void;
+  unlockQuestion: (id: number) => void;
   steps: number;
   location: Location.LocationObject;
 }
@@ -37,27 +35,25 @@ interface Props {
 
 const initalState: ContextValue = {
   quiz: {
-    activeQuiz: {
-      id: 0,
-      questions: [
-        {
-          correctAnswer: 0,
-          answers: [],
-          id: 0,
-          latitude: 0,
-          longitude: 0,
-          question: '',
-          title: '',
-          isVisited: false,
-          isAnswered: false,
-        },
-      ],
-      title: '',
-    },
-    answers: [],
+    id: 0,
+    questions: [
+      {
+        correctAnswer: 0,
+        answerAlternatives: [],
+        id: 0,
+        latitude: 0,
+        longitude: 0,
+        question: '',
+        title: '',
+      },
+    ],
+    title: '',
   },
+  answers: [],
+  unlockedQuestions: [],
   setQuizWalk: () => {},
   answerQuestion: () => {},
+  unlockQuestion: () => {},
   steps: 0,
   location: {
     coords: {
@@ -77,6 +73,8 @@ const QuizContext = createContext<ContextValue>(initalState);
 
 function QuizProvider({ children }: Props) {
   const [quiz, setQuiz] = useState(initalState.quiz);
+  const [answers, setAnswers] = useState<QuizAnswer[]>([]);
+  const [unlockedQuestions, setUnlockedQuestions] = useState<number[]>([]);
   // Hook för location - Alternativt hela use effecten
   const steps = useSubscribeToSteps();
   const location = useLocation();
@@ -84,80 +82,77 @@ function QuizProvider({ children }: Props) {
 
   // UseEffect Location ->
   useEffect(() => {
-    if (quiz.activeQuiz.id != 0) {
-      console.log('valid Quiz Id');
-      for (let i = 0; i < quiz.activeQuiz.questions.length; i++) {
-        // check every question to see if standing on it
-        const lat1 = location.coords.latitude;
-        const long1 = location.coords.longitude;
-
-        const lat2 = quiz.activeQuiz.questions[i].latitude;
-        const long2 = quiz.activeQuiz.questions[i].longitude;
-
-        console.log(
-          'Distance = ' + calcDistanceFromLongLat(lat1, long1, lat2, long2, 'K')
-        );
-
-        if (
-          quiz.activeQuiz.questions[i].isVisited == false &&
-          calcDistanceFromLongLat(lat1, long1, lat2, long2, 'K') <=
-            minDistanceToTrigger
-        ) {
-          schedulePushNotification('TipsPro!', 'Du har hittat en ny punkt!');
-          //TODO I THINK I MUTILATE?
-          setQuiz((state) => {
-            const stateCopy = state;
-            let copycopy = { ...stateCopy };
-            copycopy.activeQuiz.questions[i].isVisited = true;
-            const updatedQuizItem: QuizItem = {
-              ...state,
-            };
-
-            return updatedQuizItem;
-          });
-        }
-      }
-    }
+    verifyMovement();
   }, [location]);
 
   const setQuizWalk = (activeQuiz: QuizWalk) => {
-    let item: QuizItem = { activeQuiz: activeQuiz, answers: [] };
-    setQuiz(item);
-    //TODO, potential reset step somewhere?
+    // let item: QuizItem = { activeQuiz: activeQuiz, answers: [] };
+    setQuiz(activeQuiz);
+    setAnswers([]);
+    setUnlockedQuestions([]);
   };
 
   const answerQuestion = (id: number, answer: number) => {
-    setQuiz((state): QuizItem => {
-      const i = state.answers.findIndex((q) => q.id === id);
+    setAnswers((previousAnswers) => {
+      const clone = [...previousAnswers];
+      let i = previousAnswers.findIndex((a) => a.id === id);
       if (i != -1) {
-        const stateCopy = state;
-        let copycopy = { ...stateCopy };
-        copycopy.answers[i].answer = answer;
-        const updatedQuizItem: QuizItem = {
-          ...state,
-          answers: copycopy.answers,
-        };
-        return updatedQuizItem;
+        clone.splice(i, 1, { id, answer });
       } else {
-        const copycopy = state;
-        let stateCopy = { ...copycopy };
-        stateCopy.answers.push({ id: id, answer: answer });
-        const updatedQuizItem: QuizItem = {
-          ...state,
-          answers: stateCopy.answers,
-        };
-        return updatedQuizItem;
+        clone.push({ id, answer });
       }
+      return clone;
     });
+  };
+
+  const unlockQuestion = (id: number) => {
+    if (unlockedQuestions.includes(id)) {
+      return;
+    }
+    setUnlockedQuestions([...unlockedQuestions, id]);
   };
 
   return (
     <QuizContext.Provider
-      value={{ quiz, setQuizWalk, answerQuestion, steps, location }}
+      value={{
+        quiz,
+        setQuizWalk,
+        answerQuestion,
+        unlockQuestion,
+        steps,
+        location,
+        answers,
+        unlockedQuestions,
+      }}
     >
       {children}
     </QuizContext.Provider>
   );
+
+  function verifyMovement() {
+    if (quiz.id != 0) {
+      console.log('valid Quiz Id');
+      for (let i = 0; i < quiz.questions.length; i++) {
+        // check every question to see if standing on it
+        const question = quiz.questions[i];
+
+        const lat1 = location.coords.latitude;
+        const long1 = location.coords.longitude;
+
+        const lat2 = question.latitude;
+        const long2 = question.longitude;
+
+        if (
+          !unlockedQuestions.includes(question.id) &&
+          calcDistanceFromLongLat(lat1, long1, lat2, long2, 'K') <=
+            minDistanceToTrigger
+        ) {
+          schedulePushNotification('TipsPro!', 'Du har hittat en ny punkt!');
+          unlockQuestion(question.id);
+        }
+      }
+    }
+  }
 }
 export const useQuiz = () => useContext(QuizContext);
 

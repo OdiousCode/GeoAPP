@@ -17,52 +17,63 @@ export default function OverviewScreen({
   navigation,
   route,
 }: TabScreenProps<'OverviewScreen'>) {
-  const { quiz, answerQuestion, setQuizWalk, steps, location } = useQuiz();
+  const {
+    quiz,
+    answerQuestion,
+    setQuizWalk,
+    steps,
+    location,
+    answers,
+    unlockedQuestions,
+  } = useQuiz();
 
   return (
     <SafeAreaView style={[styles.container]}>
       <View style={{ margin: 10 }}>
-        <BigText textStyles={{ color: coltheme.pink }}>
-          {quiz.activeQuiz.title}
-        </BigText>
+        <BigText textStyles={{ color: coltheme.pink }}>{quiz.title}</BigText>
       </View>
       <View style={{ marginTop: 5, marginBottom: 35 }}>
         <BigText textStyles={{ color: coltheme.pink }}>Frågor</BigText>
       </View>
       <View style={{ margin: 10 }}>
         <SmallText>
-          Frågor besvarade {quiz.answers.length} /{' '}
-          {quiz.activeQuiz.questions.length}
+          Frågor besvarade {answers.length} / {quiz.questions.length}
         </SmallText>
       </View>
       <View style={{ margin: 10 }}>
         <MediumText>Steg {steps}</MediumText>
       </View>
       <View style={{ margin: 20 }}>
-        {quiz.activeQuiz.questions.map((prop) => {
-          if (prop.isVisited) {
+        {quiz.questions.map((question) => {
+          if (unlockedQuestions.includes(question.id)) {
             // this quiz is found
-            let answer = quiz.answers.find((q) => q.id == prop.id)?.answer;
+            let answerInNumber = answers.find(
+              (q) => q.id == question.id
+            )?.answer;
+            let answerInText = answerInNumber
+              ? question.answerAlternatives[answerInNumber]
+              : 'Ej Besvarad';
 
             return (
-              <View key={prop.id} style={{ margin: 5 }}>
+              <View key={question.id} style={{ margin: 5 }}>
                 <Pressable
-                  key={prop.id}
+                  key={question.id}
                   onPress={() => {
                     navigation.navigate('QuestionStackNavigator', {
                       screen: 'QuestionScreen',
-                      params: { id: prop.id },
+                      params: { id: question.id },
                     });
                   }}
                 >
                   <MediumText textStyles={{ color: coltheme.cyan }}>
-                    #{prop.id} /{answer} /{prop.question.slice(0, 19)}
+                    #{question.id} / {answerInText}/
+                    {question.question.slice(0, 19)}
                   </MediumText>
                 </Pressable>
               </View>
             );
           } else {
-            return <MediumText key={prop.id}> ?? / ? / ?????</MediumText>;
+            return <MediumText key={question.id}> ?? / ? / ?????</MediumText>;
           }
         })}
       </View>
