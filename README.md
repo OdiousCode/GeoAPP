@@ -40,7 +40,9 @@ Vi har valt att hålla oss till en färdig förkodad quiz, medans tanken var att
 
 - Notification - Används för att notifiera användaren att dom nått positionen av en fråga.
 
-- StatusBar - Ser till att vår appliktion inte hamnar bakom telefonen "fasta" interface, i form av bakåt-knappar, batterimätare osv.
+- SafeaAreaView - Fungerar som en vanlig men ser även till att vår appliktion inte hamnar bakom telefonen "fasta" interface, i form av bakåt-knappar, batterimätare osv.
+
+- StatusBar - Ändrar färgen på telefonens statusfält (batteri, nätstyrka osv) och knappfältet på android, i vårt fall så att den är ljus. Eftersom vår app är väldigt mörk.
 
 - MaterialIcons - ikoner :)
 
