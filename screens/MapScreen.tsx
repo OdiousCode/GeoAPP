@@ -10,6 +10,7 @@ import { BigText, SmallText } from '../components/TextTemplates';
 import { useQuiz } from '../context/QuizContext';
 import { QuizWalk } from '../data/data';
 import { TabScreenProps } from '../navigators/TabNavigator';
+
 export default function MapScreen({
   navigation,
   route,

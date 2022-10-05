@@ -1,10 +1,13 @@
-import { PanoramaSharp } from '@mui/icons-material';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, View } from 'react-native';
 import { RootTabsParamList } from '../App';
+import { coltheme } from '../components/coltheme';
+import RadioButton from '../components/radioButton';
+import { BigText, SmallText } from '../components/TextTemplates';
 import { useQuiz } from '../context/QuizContext';
 import { QuestionScreenProps } from '../navigators/QuestionStackNavigator';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 type Props = NativeStackScreenProps<RootTabsParamList, 'Question'>;
 
@@ -12,24 +15,57 @@ export default function QuestionScreen({
   navigation,
   route,
 }: QuestionScreenProps<'QuestionScreen'>) {
-  const { quiz, answerQuestion, setQuizWalk } = useQuiz();
-  let quest = quiz.activeQuiz.questions.find((p) => p.id === route.params?.id);
+  const { quiz, answerQuestion } = useQuiz();
 
-  // let question = quiz.activeQuiz.questions[route.params.id];
-  if (!quest) {
+  let question = quiz.activeQuiz.questions.find(
+    (p) => p.id === route.params.id
+  );
+  let answer = quiz.answers.find((a) => a.id === route.params.id);
+
+  if (!question) {
     return (
-      <View style={styles.container}>
-        <Text>There is no question with that ID</Text>
+      <SafeAreaView style={styles.screen}>
+        <SmallText>There is no question with that ID</SmallText>
         <Button title="Gå tillbaka" onPress={() => navigation.goBack()} />
-      </View>
+      </SafeAreaView>
     );
   } else {
     return (
-      <View style={styles.container}>
-        <Text>
-          {quest?.id}
-          {quest?.title}
-        </Text>
+      <View style={styles.screen}>
+        <BigText>
+          {question?.id}. {question?.title}
+        </BigText>
+        <SmallText textStyles={{ fontSize: 20 }}>
+          {question?.question}
+        </SmallText>
+        <View>
+          {question.answers.map((prop, questionChoices) => {
+            return answer?.answer === questionChoices ? (
+              <RadioButton
+                isSelected={true}
+                onPress={() => {
+                  navigation.goBack();
+                }}
+                label={prop}
+                value={questionChoices.toString()}
+                key={questionChoices}
+              />
+            ) : (
+              <RadioButton
+                isSelected={false}
+                onPress={() => {
+                  answerQuestion(question.id, questionChoices);
+                  navigation.goBack();
+                }}
+                label={prop}
+                value={questionChoices.toString()}
+                key={questionChoices}
+              />
+            );
+          })}
+
+          {/* <RadioButton isSelected={true} onPress={() => selectedAnswer = key.toString()} label={prop} value={key} /> */}
+        </View>
         <Button title="Gå tillbaka" onPress={() => navigation.goBack()} />
       </View>
     );
@@ -37,10 +73,10 @@ export default function QuestionScreen({
 }
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: coltheme.background,
   },
 });

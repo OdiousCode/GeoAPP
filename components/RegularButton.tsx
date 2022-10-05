@@ -15,7 +15,7 @@ const ButtonView = styled.TouchableOpacity`
   background-color: ${coltheme.secondary};
   width: 100%;
   padding: 10px;
-  border: 2px solid ${coltheme.primary};
+  border: 1px solid ${coltheme.primary};
 `;
 
 interface ButtonProps {
