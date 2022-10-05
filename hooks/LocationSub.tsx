@@ -1,32 +1,102 @@
 import React, { useState, useEffect } from 'react';
 import * as Location from 'expo-location';
-import { schedulePushNotification } from './Notification';
+import { schedulePushNotification } from '../helper/functions/Notification';
 import { useQuiz } from '../context/QuizContext';
+import { QuizWalk } from '../data/data';
 
-// in KM
-const minDistanceToTrigger: number = 0.1;
+export default function useLocation() {
+  const initialState: Location.LocationObject = {
+    coords: {
+      accuracy: 0,
+      altitude: 0,
+      altitudeAccuracy: 0,
+      heading: 0,
+      latitude: 0,
+      longitude: 0,
+      speed: 0,
+    },
+    timestamp: Date.now(),
+  };
 
-export default function subscribeToLocation() {
-  // const [onceLocation, setLocation] = useState({});
+  const [_Location, setLocation] = useState(initialState);
   // const [errorMsg, setErrorMsg] = useState('');
   // const [foregroundPermission, setForeGroundPermission] = useState({});
-  const { quiz, answerQuestion, setQuizWalk } = useQuiz();
+  // const { quiz, answerQuestion, setQuizWalk } = useQuiz();
+
+  // useEffect(() => {
+  //   let subscribe = () => {
+  //     const sub = Pedometer.watchStepCount((result) => {
+  //       updateStepCount(result.steps);
+  //     });
+  //   };
+  //   subscribe();
+  // }, []);
 
   useEffect(() => {
     (async () => {
+      let foregroundSubscrition = () => {
+        const sub = Location.watchPositionAsync(
+          {
+            accuracy: Location.Accuracy.High,
+            distanceInterval: 1, //TODO mby alter
+          },
+          (location) => {
+            setLocation(location);
+          }
+        );
+      };
+
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
-        // setErrorMsg('Permission to access location was denied');
         return;
       }
 
-      let foregroundSubscrition = Location.watchPositionAsync(
-        {
-          // Tracking options
-          accuracy: Location.Accuracy.High,
-          distanceInterval: 10,
-        },
-        (location) => {
+      foregroundSubscrition();
+    })();
+
+    return () => {
+      /*cleanup*/
+    };
+  }, []);
+  return _Location; // alternativt quiz
+}
+
+// OLD
+
+//   useEffect(() => {
+//     (async () => {
+//       let { status } = await Location.requestForegroundPermissionsAsync();
+//       if (status !== 'granted') {
+//         // setErrorMsg('Permission to access location was denied');
+//         return;
+//       }
+
+//       let foregroundSubscrition = Location.watchPositionAsync(
+//         {
+//           // Tracking options
+//           accuracy: Location.Accuracy.High,
+//           distanceInterval: 10,
+//         },
+//         (location) => {
+//           setLocation(location);
+//           console.log('Loc 1:' + location);
+//         }
+//       );
+//       let location = await Location.getCurrentPositionAsync({});
+//       setLocation(location);
+//       console.log('Loc 2:' + location);
+//       // let location = await Location.getCurrentPositionAsync({});
+//       // setLocation(location);
+//       // console.log(location);
+//     })();
+//     return () => {
+//       /*cleanup*/
+//     };
+//   }, []);
+//   return _Location; // alternativt quiz
+// }
+
+/*
           console.log(location);
 
           //Template ID is 0
@@ -56,17 +126,9 @@ export default function subscribeToLocation() {
           } else {
             console.log('no valid quiz id');
           }
-        }
-      );
+*/
 
-      let location = await Location.getCurrentPositionAsync({});
-      // setLocation(location);
-      console.log(location);
-    })();
-  }, []);
-}
-
-function calcDistanceFromLongLat(
+export function calcDistanceFromLongLat(
   lat1: number,
   lon1: number,
   lat2: number,

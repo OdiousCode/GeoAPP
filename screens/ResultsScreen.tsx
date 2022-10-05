@@ -10,8 +10,11 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootTabsParamList } from '../App';
 import RegularButton from '../components/RegularButton';
+import { useQuiz } from '../context/QuizContext';
 // import { Stack, Button } from '@react-native-material/core';
 import { QuestionScreenProps } from '../navigators/QuestionStackNavigator';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { coltheme } from '../components/coltheme';
 
 type Props = NativeStackScreenProps<RootTabsParamList, 'Results'>;
 
@@ -19,28 +22,47 @@ export default function ResultScreen({
   navigation,
   route,
 }: QuestionScreenProps<'ResultScreen'>) {
+  const { quiz, answerQuestion, setQuizWalk, steps } = useQuiz();
+
+  let correctAnswers = 0;
+  quiz.answers.forEach((element) => {
+    let questionInRelevence = quiz.activeQuiz.questions.find(
+      (q) => q.id === element.id
+    );
+    if (questionInRelevence) {
+      if (questionInRelevence.correctAnswer === element.answer)
+        correctAnswers++;
+    }
+  });
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container]}>
       <View style={styles.headerContainer}>
-        <Text style={styles.title}>Quiz: Skallegången</Text>
+        <Text style={styles.title}>Quiz: {quiz.activeQuiz.title}</Text>
         <Text style={styles.title}>Resultat</Text>
       </View>
       <View style={styles.boxContainer}>
         <Text style={styles.title}>Mina stats</Text>
-        <Text style={styles.resultText}>Deltagare: #27</Text>
-        <Text style={styles.resultText}>Antal steg: 2243</Text>
-        <Text style={styles.resultText}>Svar 6/7</Text>
-        <Text style={styles.resultText}>Rätt 4/6</Text>
+        <Text style={styles.resultText}>Deltagare: #??</Text>
+        <Text style={styles.resultText}>Antal steg: {steps}</Text>
+        <Text style={styles.resultText}>
+          Svar {quiz.answers.length} / {quiz.activeQuiz.questions.length}
+        </Text>
+        <Text style={styles.resultText}>
+          Rätt {correctAnswers} / {quiz.activeQuiz.questions.length}
+        </Text>
       </View>
-      <View style={styles.boxContainer}>
+
+      {/* WE DONT HAVE DATE FOR THIS YET */}
+      {/* <View style={styles.boxContainer}>
         <Text style={styles.title}>Genomsnitt</Text>
         <Text style={styles.resultText}>Deltagare: 34</Text>
         <Text style={styles.resultText}>Antal rätt: 4</Text>
         <Text style={styles.resultText}>Antal steg: 4471</Text>
-      </View>
+      </View> */}
       <View style={styles.buttonContainer}>
         <RegularButton onPress={() => navigation.navigate('Login')}>
-          Go back
+          EXIT
         </RegularButton>
       </View>
     </SafeAreaView>
@@ -50,9 +72,10 @@ export default function ResultScreen({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    width: '100%',
+    backgroundColor: coltheme.background,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   boxContainer: {
     width: '90%',
@@ -60,7 +83,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     margin: 30,
     flex: 3,
-    backgroundColor: '#ddd',
+    backgroundColor: coltheme.primary,
     justifyContent: 'space-around',
     borderRadius: 10,
   },
@@ -72,17 +95,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    color: '#121212',
+    color: coltheme.white,
     fontSize: 20,
     textAlign: 'center',
   },
   resultText: {
-    color: '#121212',
+    color: coltheme.white,
     fontSize: 20,
   },
   backBtn: {
     backgroundColor: '#ddd',
-    width: '40%',
+    width: '70%',
   },
   buttonContainer: {
     display: 'flex',

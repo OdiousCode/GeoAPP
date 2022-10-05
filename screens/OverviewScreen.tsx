@@ -6,7 +6,7 @@ import RegularButton from '../components/RegularButton';
 import { coltheme } from '../components/coltheme';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useQuiz } from '../context/QuizContext';
-import { getData, QuizWalk } from '../data/data';
+import { QuizWalk } from '../data/data';
 import { TabScreenProps } from '../navigators/TabNavigator';
 import { BigText, MediumText, SmallText } from '../components/TextTemplates';
 import { ThemeConsumer } from 'styled-components/native';
@@ -17,24 +17,7 @@ export default function OverviewScreen({
   navigation,
   route,
 }: TabScreenProps<'OverviewScreen'>) {
-  // let data: QuizWalk = getData(0);
-
-  const { quiz, answerQuestion, setQuizWalk } = useQuiz();
-
-  // let unknownQuestions = 0;
-  // data.questions.forEach((x) => {
-  //   if (!x.isVisited) unknownQuestions++;
-  // });
-
-  // let discoveredQuestions = 0;
-  // data.questions.forEach((x) => {
-  //   if (x.isVisited) discoveredQuestions++;
-  // });
-
-  // let answeredQuestions = 0;
-  // data.questions.forEach((x) => {
-  //   if (x.isAnswered) answeredQuestions++;
-  // });
+  const { quiz, answerQuestion, setQuizWalk, steps, location } = useQuiz();
 
   return (
     <SafeAreaView style={[styles.container]}>
@@ -46,65 +29,55 @@ export default function OverviewScreen({
       <View style={{ marginTop: 5, marginBottom: 35 }}>
         <BigText textStyles={{ color: coltheme.pink }}>Frågor</BigText>
       </View>
-
       <View style={{ margin: 10 }}>
         <SmallText>
           Frågor besvarade {quiz.answers.length} /{' '}
           {quiz.activeQuiz.questions.length}
         </SmallText>
       </View>
-
       <View style={{ margin: 10 }}>
-        <SmallText>Steg {quiz.steps}</SmallText>
+        <MediumText>Steg {steps}</MediumText>
       </View>
-
-      <View>
-        {quiz.activeQuiz.questions.map((prop, key) => {
+      <View style={{ margin: 20 }}>
+        {quiz.activeQuiz.questions.map((prop) => {
           if (prop.isVisited) {
             // this quiz is found
-            // {quiz.answers.find((q) => q.id == prop.id)?.answer}
+            let answer = quiz.answers.find((q) => q.id == prop.id)?.answer;
 
             return (
-              <Pressable
-                onPress={() => {
-                  navigation.navigate('QuestionStackNavigator', {
-                    screen: 'QuestionScreen',
-                    params: { id: prop.id },
-                  });
-                }}
-              >
-                <MediumText>#{prop.id} / TEMP A / Det var en...</MediumText>
-              </Pressable>
+              <View key={prop.id} style={{ margin: 5 }}>
+                <Pressable
+                  key={prop.id}
+                  onPress={() => {
+                    navigation.navigate('QuestionStackNavigator', {
+                      screen: 'QuestionScreen',
+                      params: { id: prop.id },
+                    });
+                  }}
+                >
+                  <MediumText textStyles={{ color: coltheme.cyan }}>
+                    #{prop.id} /{answer} /{prop.question.slice(0, 19)}
+                  </MediumText>
+                </Pressable>
+              </View>
             );
           } else {
-            return <MediumText> ?? / ? / ?????</MediumText>;
+            return <MediumText key={prop.id}> ?? / ? / ?????</MediumText>;
           }
         })}
       </View>
-
       {/* Behöver Datan ifrån context här å sen mappa ut den */}
-
       <RegularButton
         onPress={() => {
-          // saveTableToContext();
-          // navigation.navigate('Results');
-          //setQuizWalk(data);
+          navigation.navigate('QuestionStackNavigator', {
+            screen: 'ResultScreen',
+          });
         }}
       >
         Lämna in
       </RegularButton>
     </SafeAreaView>
   );
-}
-
-function saveTableToContext() {
-  let data: QuizWalk = getData(0);
-  // const { quiz, answerQuestion, setQuizWalk } = useQuiz();
-
-  // console.log('save Data');
-  // setQuizWalk(data);
-  // answerQuestion(1, 2);
-  // console.log(quiz);
 }
 
 const styles = StyleSheet.create({

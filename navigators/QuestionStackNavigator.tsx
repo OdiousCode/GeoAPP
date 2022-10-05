@@ -24,7 +24,7 @@ export type QuestionScreenProps<Screen extends keyof QuestionStackParamList> =
 
 const Stack = createNativeStackNavigator<QuestionStackParamList>();
 
-export default function HomeStackNavigator() {
+export default function QuestionStackNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="QuestionScreen" component={QuestionScreen} />

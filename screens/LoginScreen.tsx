@@ -3,12 +3,11 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { Button, StyleSheet, Text, View, Image, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { RootTabsParamList } from '../App';
 import { coltheme } from '../components/coltheme';
 import RegularButton from '../components/RegularButton';
 import { useQuiz } from '../context/QuizContext';
 import { getData } from '../data/data';
-import subscribeToLocation from '../hooks/LocationSub';
+import useLocation from '../hooks/LocationSub';
 import SubscribeToSteps from '../hooks/Pedometer';
 import { RootScreenProps } from '../navigators/RootStackNavigator';
 
@@ -17,8 +16,7 @@ export default function LoginScreen({
   route,
 }: RootScreenProps<'Login'>) {
   const { quiz, answerQuestion, setQuizWalk } = useQuiz();
-  subscribeToLocation();
-  SubscribeToSteps();
+
   return (
     <SafeAreaView style={[styles.container]}>
       <Image source={require('../assets/geoappsplash.png')}></Image>
@@ -30,12 +28,17 @@ export default function LoginScreen({
       </View> */}
       <RegularButton
         onPress={() => {
-          let data = getData(0);
-          setQuizWalk(data);
-          navigation.navigate('TabNavigator', { screen: 'HomeScreen' });
+          //TODO error handling
+          let data = getData(1);
+          if (data != undefined) {
+            console.log('Get Data');
+            console.log(data);
+
+            setQuizWalk(data);
+            navigation.navigate('TabNavigator', { screen: 'HomeScreen' });
+          }
         }}
       >
-        {' '}
         Logga in
       </RegularButton>
       {/* <View style={{ margin: 2 }}>

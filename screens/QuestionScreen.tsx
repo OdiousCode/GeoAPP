@@ -1,12 +1,13 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React from 'react';
-import { Button, SafeAreaView, StyleSheet, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { Button, StyleSheet, View } from 'react-native';
 import { RootTabsParamList } from '../App';
 import { coltheme } from '../components/coltheme';
 import RadioButton from '../components/radioButton';
 import { BigText, SmallText } from '../components/TextTemplates';
 import { useQuiz } from '../context/QuizContext';
 import { QuestionScreenProps } from '../navigators/QuestionStackNavigator';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 type Props = NativeStackScreenProps<RootTabsParamList, 'Question'>;
 

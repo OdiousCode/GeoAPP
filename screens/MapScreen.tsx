@@ -7,7 +7,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootTabsParamList } from '../App';
 import { coltheme } from '../components/coltheme';
 import { BigText, SmallText } from '../components/TextTemplates';
-import { getData, QuizWalk } from '../data/data';
+import { useQuiz } from '../context/QuizContext';
+import { QuizWalk } from '../data/data';
 import { TabScreenProps } from '../navigators/TabNavigator';
 
 export default function MapScreen({
@@ -15,7 +16,19 @@ export default function MapScreen({
   route,
 }: TabScreenProps<'MapScreen'>) {
   //data = XXX.fetch(route.params.quizWalkId);
-  let data: QuizWalk = getData(0);
+  const { quiz, answerQuestion, setQuizWalk, steps, location } = useQuiz();
+  let data: QuizWalk = quiz.activeQuiz;
+
+  // let avgLat: number = 0;
+  // let avgLong: number = 0;
+
+  // data.questions.forEach((q) => {
+  //   avgLat += q.latitude;
+  //   avgLong += q.longitude;
+  // });
+
+  // avgLat /= data.questions.length;
+  // avgLong /= data.questions.length;
 
   const totalQuestions = data.questions.length;
 
@@ -39,13 +52,69 @@ export default function MapScreen({
       <MapView
         style={styles.map}
         initialRegion={{
-          latitude: 57.721111,
-          longitude: 12.940278,
+          latitude: data.questions[0]?.latitude,
+          longitude: data.questions[0]?.longitude,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
       >
         <Marker
+          coordinate={{
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+          }}
+          pinColor={coltheme.white}
+          title={'Spelare'}
+        />
+
+        {data.questions.map((prop) => {
+          if (prop.isAnswered) {
+            // ANSWERED MARKER
+            return (
+              <Marker
+                key={prop.id}
+                coordinate={{
+                  latitude: prop.latitude,
+                  longitude: prop.longitude,
+                }}
+                pinColor={coltheme.green}
+                title={prop.title}
+                description={prop.question}
+              />
+            );
+          } else if (prop.isVisited && !prop.isAnswered) {
+            // FOUND MARKER
+            return (
+              <Marker
+                key={prop.id}
+                coordinate={{
+                  latitude: prop.latitude,
+                  longitude: prop.longitude,
+                }}
+                pinColor={coltheme.orange}
+                title={prop.title}
+                description={prop.question}
+              />
+            );
+          } else if (!prop.isVisited) {
+            // NOT FOUND ANSWER
+            return (
+              <Marker
+                key={prop.id}
+                coordinate={{
+                  latitude: prop.latitude,
+                  longitude: prop.longitude,
+                }}
+                pinColor={coltheme.red}
+                title={'??'}
+                description={'????'}
+              />
+            );
+          }
+        })}
+      </MapView>
+
+      {/* <Marker
           coordinate={{
             latitude: data.questions[0].latitude,
             longitude: data.questions[0].longitude,
@@ -53,8 +122,8 @@ export default function MapScreen({
           pinColor={coltheme.green}
           title={data.questions[0].title}
           description={data.questions[0].question}
-        />
-        <Marker
+        /> */}
+      {/* <Marker
           coordinate={{
             latitude: data.questions[1].latitude,
             longitude: data.questions[1].longitude,
@@ -62,8 +131,8 @@ export default function MapScreen({
           pinColor={coltheme.red}
           title={data.questions[1].title}
           description={data.questions[1].question}
-        />
-        {data.questions[2].isVisited ? (
+        /> */}
+      {/* {data.questions[2].isVisited ? (
           <Marker
             coordinate={{
               latitude: data.questions[2].latitude,
@@ -82,8 +151,8 @@ export default function MapScreen({
             pinColor={coltheme.red}
             title={'?'}
           />
-        )}
-      </MapView>
+        )} */}
+      {/* </MapView> */}
 
       <BigText textStyles={{ color: coltheme.cyan }}>{data.title}</BigText>
 
