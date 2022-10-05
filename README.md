@@ -1,42 +1,73 @@
 # GeoAPP (Name pending)
 
 ## Projektmedlemmar 
+[Görgen Andersson](https://github.com/OdiousCode/)
 
-Görgen Andersson
+[Erik Jakobsson](https://github.com/Serover)
 
-Erik Jakobsson
+[Jimmie Kleman](https://github.com/CmdrMaylee)
 
-Jimmie Kleman
- 
-Hampus Andersson 
+[Hampus Andersson](https://github.com/HampusAndersson01)
 
 # Våra avgränsningar #
+
+Vi har valt att hålla oss till en färdig förkodad quiz, medans tanken var att man ska kunna skapa egna quizes som t.ex en Administratör.
 
 # Komponenter vi har nyttjat #
 
 ## React-native komponenter ##
 
-- React-Navigation
-- View
-- Text
-- Image
-- Textinput
-- Button
+- React-Navigation - Används för att navigera emellan olika sidor i appen.
+
+- View - Används flitigt, för att skapa sektioner på varje sida i appen, likt div i html.
+
+- Text - Används i samklang med styled components, för att skapa fördefinierade textfält med möjlighet att ta nya props. I vårt fall small-, medium- och bigtext.
+
+- Image - Används för att ladda in bilder på b.la välkomstsidan (login)
+
+- Pressable - Används bl.a för att göra varje fråga i listan av frågor till en länk till den specifika frågan.
+
+- TouchableOpacity - Våra fördefinierade "regularButton" med möjlighet att ta nya props, är en knapp skapad i kombination av TouchableOpacity och styled components.
 
 ## Expo komponenter ##
 
-- MapView
-- Pedometer (tbi)
-- Location (tbi)
-- Font (tbi)
-- Notification (tbi)
-- Audio (tbi)
+- MapView - Används för att rita vår vackra karta med markers för frågor.
+
+- Pedometer - Räknar stegen användaren tar åt oss.
+
+- Location - Används för att se vart användaren befinner sig, för att se om dom är nära en fråga och därmed "hittar" den specfika frågan.
+
+- Notification - Används för att notifiera användaren att dom nått positionen av en fråga.
+
+- StatusBar - Ser till att vår appliktion inte hamnar bakom telefonen "fasta" interface, i form av bakåt-knappar, batterimätare osv.
 
 ## Extern komponent ##
 
-- styled components (tbi)
+- styled components - Använder vi tillsammans med RN komponenterna Text och TouchableOpacity, för att skapa våra egna fördefinierade knappar och texter i olika textstorlek med färger osv.
 
-# GeoAPP
+## Krav för godkänt: ##
+
+- [X] Projektet använder minst 6 stycken RN-komponenter och minst 6 stycken Expo
+komponenter.
+- [X] De utvalda komponenterna ska antecknas i er README tillsammans med en lista över
+genomförda krav.
+- [X] Git & GitHub har använts
+- [X] Projektmappen innehåller en README.md fil - (läs ovan för mer info)
+- [ ] Uppgiften lämnas in i tid!
+- [ ] Muntlig presentation är genomförd
+
+## Krav för väl godkänt: ##
+
+- [ ] Alla punkter för godkänt är uppfyllda
+- [X] React Navigation används för att skapa en bättre upplevelse i appen.
+- [X] Ytterligare en valfri extern modul används i projektet.
+- [X] Prototyper för applikation tas fram innan den implementeras. Bilder på prototypen
+skall finnas i projektet vid inlämning.
+
+
+## Uppgiftsbeskrivning ##
+
+## GeoAPP ##
 I den här laborationen ska ni i grupp om tre skapa en nativ app med med hjälp av React
 Native (RN), Expo och Typescript. Vad ni väljer att skapa är valfritt däremot ska ni
 använda er av minst 6 stycken RN komponenter och minst 6 stycken från Expo SDK’n.
@@ -55,22 +86,3 @@ applikation, vilka komponenter ni har använt och kort beskriva vad dom används
 här kan det var intressant att visa lite kod kring några utvalda komponenter. Ni ska även
 presentera hur ni har planerat, genomfört och strukturerat ert arbete. Dessutom ska
 presentationen innefatta en reflekterande del. Varje grupp har ca 20 min på sig.
-
-## Krav för godkänt: ##
-
-- [ ] Projektet använder minst 6 stycken RN-komponenter och minst 6 stycken Expo
-komponenter.
-- [ ] De utvalda komponenterna ska antecknas i er README tillsammans med en lista över
-genomförda krav.
-- [X] Git & GitHub har använts
-- [X] Projektmappen innehåller en README.md fil - (läs ovan för mer info)
-- [ ] Uppgiften lämnas in i tid!
-- [ ] Muntlig presentation är genomförd
-
-## Krav för väl godkänt: ##
-
-- [ ] Alla punkter för godkänt är uppfyllda
-- [X] React Navigation används för att skapa en bättre upplevelse i appen.
-- [ ] Ytterligare en valfri extern modul används i projektet.
-- [X] Prototyper för applikation tas fram innan den implementeras. Bilder på prototypen
-skall finnas i projektet vid inlämning.
