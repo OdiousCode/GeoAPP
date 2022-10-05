@@ -9,7 +9,6 @@ import { Pressable } from 'react-native';
 import QuestionScreen from '../screens/QuestionScreen';
 import ResultScreen from '../screens/ResultsScreen';
 import { RootStackParamList } from './RootStackNavigator';
-
 import { TabScreenProps } from './TabNavigator';
 
 export type QuestionStackParamList = {
