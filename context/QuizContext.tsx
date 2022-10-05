@@ -84,7 +84,6 @@ function QuizProvider({ children }: Props) {
 
   // UseEffect Location ->
   useEffect(() => {
-    console.log('Use effect ran');
     if (quiz.activeQuiz.id != 0) {
       console.log('valid Quiz Id');
       for (let i = 0; i < quiz.activeQuiz.questions.length; i++) {
@@ -100,8 +99,9 @@ function QuizProvider({ children }: Props) {
         );
 
         if (
+          quiz.activeQuiz.questions[i].isVisited == false &&
           calcDistanceFromLongLat(lat1, long1, lat2, long2, 'K') <=
-          minDistanceToTrigger
+            minDistanceToTrigger
         ) {
           //quiz.activeQuiz.questions[i].isVisited == true; //TODO make function (( mby use setquiz(...state, question[i].isvisited: true)))
 

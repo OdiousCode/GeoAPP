@@ -81,7 +81,7 @@ export default function MapScreen({
                   latitude: prop.latitude,
                   longitude: prop.longitude,
                 }}
-                pinColor={coltheme.red}
+                pinColor={coltheme.orange}
                 title={prop.title}
                 description={prop.question}
               />
