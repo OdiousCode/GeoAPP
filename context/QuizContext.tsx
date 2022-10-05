@@ -103,11 +103,8 @@ function QuizProvider({ children }: Props) {
           calcDistanceFromLongLat(lat1, long1, lat2, long2, 'K') <=
             minDistanceToTrigger
         ) {
-          //quiz.activeQuiz.questions[i].isVisited == true; //TODO make function (( mby use setquiz(...state, question[i].isvisited: true)))
-
-          console.log('trigger');
-          //TODO be om hjälp
           schedulePushNotification('TipsPro!', 'Du har hittat en ny punkt!');
+          //TODO I THINK I MUTILATE?
           setQuiz((state) => {
             const stateCopy = state;
             let copycopy = { ...stateCopy };
@@ -115,6 +112,7 @@ function QuizProvider({ children }: Props) {
             const updatedQuizItem: QuizItem = {
               ...state,
             };
+
             return updatedQuizItem;
           });
         }

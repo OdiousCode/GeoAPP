@@ -28,10 +28,15 @@ export default function LoginScreen({
       </View> */}
       <RegularButton
         onPress={() => {
-          //TODO  make data = getData(Input)
-          let data = getData(0);
-          setQuizWalk(data);
-          navigation.navigate('TabNavigator', { screen: 'HomeScreen' });
+          //TODO error handling
+          let data = getData(1);
+          if (data != undefined) {
+            console.log('Get Data');
+            console.log(data);
+
+            setQuizWalk(data);
+            navigation.navigate('TabNavigator', { screen: 'HomeScreen' });
+          }
         }}
       >
         Logga in

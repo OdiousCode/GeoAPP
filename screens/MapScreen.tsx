@@ -8,7 +8,7 @@ import { RootTabsParamList } from '../App';
 import { coltheme } from '../components/coltheme';
 import { BigText, SmallText } from '../components/TextTemplates';
 import { useQuiz } from '../context/QuizContext';
-import { getData, QuizWalk } from '../data/data';
+import { QuizWalk } from '../data/data';
 import { TabScreenProps } from '../navigators/TabNavigator';
 export default function MapScreen({
   navigation,
@@ -57,6 +57,15 @@ export default function MapScreen({
           longitudeDelta: 0.0421,
         }}
       >
+        <Marker
+          coordinate={{
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+          }}
+          pinColor={coltheme.white}
+          title={'Spelare'}
+        />
+
         {data.questions.map((prop) => {
           if (prop.isAnswered) {
             // ANSWERED MARKER

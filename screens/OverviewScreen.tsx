@@ -6,7 +6,7 @@ import RegularButton from '../components/RegularButton';
 import { coltheme } from '../components/coltheme';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useQuiz } from '../context/QuizContext';
-import { getData, QuizWalk } from '../data/data';
+import { QuizWalk } from '../data/data';
 import { TabScreenProps } from '../navigators/TabNavigator';
 import { BigText, MediumText, SmallText } from '../components/TextTemplates';
 import { ThemeConsumer } from 'styled-components/native';
@@ -36,31 +36,30 @@ export default function OverviewScreen({
         </SmallText>
       </View>
       <View style={{ margin: 10 }}>
-        <SmallText>Steg {steps}</SmallText>
+        <MediumText>Steg {steps}</MediumText>
       </View>
-      <View style={{ margin: 10 }}>
-        <SmallText>LOCATION {location.coords.latitude}</SmallText>
-      </View>
-      <View>
+      <View style={{ margin: 20 }}>
         {quiz.activeQuiz.questions.map((prop) => {
           if (prop.isVisited) {
             // this quiz is found
-            // {quiz.answers.find((q) => q.id == prop.id)?.answer}
+            let answer = quiz.answers.find((q) => q.id == prop.id)?.answer;
 
             return (
-              <Pressable
-                key={prop.id}
-                onPress={() => {
-                  navigation.navigate('QuestionStackNavigator', {
-                    screen: 'QuestionScreen',
-                    params: { id: prop.id },
-                  });
-                }}
-              >
-                <MediumText textStyles={{ color: coltheme.cyan }}>
-                  #{prop.id} / TEMP A / Det var en...
-                </MediumText>
-              </Pressable>
+              <View key={prop.id} style={{ margin: 5 }}>
+                <Pressable
+                  key={prop.id}
+                  onPress={() => {
+                    navigation.navigate('QuestionStackNavigator', {
+                      screen: 'QuestionScreen',
+                      params: { id: prop.id },
+                    });
+                  }}
+                >
+                  <MediumText textStyles={{ color: coltheme.cyan }}>
+                    #{prop.id} /{answer} /{prop.question.slice(0, 19)}
+                  </MediumText>
+                </Pressable>
+              </View>
             );
           } else {
             return <MediumText key={prop.id}> ?? / ? / ?????</MediumText>;
@@ -79,16 +78,6 @@ export default function OverviewScreen({
       </RegularButton>
     </SafeAreaView>
   );
-}
-
-function saveTableToContext() {
-  let data: QuizWalk = getData(0);
-  // const { quiz, answerQuestion, setQuizWalk } = useQuiz();
-
-  // console.log('save Data');
-  // setQuizWalk(data);
-  // answerQuestion(1, 2);
-  // console.log(quiz);
 }
 
 const styles = StyleSheet.create({

@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 import { RootTabsParamList } from '../App';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { getData, QuizWalk } from '../data/data';
+import { QuizWalk } from '../data/data';
 import { BigText, SmallText } from '../components/TextTemplates';
 import { coltheme } from '../components/coltheme';
 import RegularButton from '../components/RegularButton';
