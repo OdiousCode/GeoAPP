@@ -29,7 +29,7 @@ export default function QuestionScreen({
     );
   }
   return (
-    <View style={styles.screen}>
+    <SafeAreaView style={styles.screen}>
       <BigText>
         {question.id}. {question.title}
       </BigText>
@@ -63,7 +63,7 @@ export default function QuestionScreen({
         {/* <RadioButton isSelected={true} onPress={() => selectedAnswer = key.toString()} label={prop} value={key} /> */}
       </View>
       <Button title="Gå tillbaka" onPress={() => navigation.goBack()} />
-    </View>
+    </SafeAreaView>
   );
 }
 
