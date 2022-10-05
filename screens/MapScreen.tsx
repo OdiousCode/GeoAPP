@@ -16,8 +16,15 @@ export default function MapScreen({
   route,
 }: TabScreenProps<'MapScreen'>) {
   //data = XXX.fetch(route.params.quizWalkId);
-  const { quiz, answerQuestion, setQuizWalk, steps, location } = useQuiz();
-  let data: QuizWalk = quiz.activeQuiz;
+  const {
+    quiz,
+    answerQuestion,
+    setQuizWalk,
+    steps,
+    location,
+    answers,
+    unlockedQuestions,
+  } = useQuiz();
 
   // let avgLat: number = 0;
   // let avgLong: number = 0;
@@ -30,30 +37,28 @@ export default function MapScreen({
   // avgLat /= data.questions.length;
   // avgLong /= data.questions.length;
 
-  const totalQuestions = data.questions.length;
+  // let unknownQuestions = 0;
+  // data.questions.forEach((x) => {
+  //   if (!x.isVisited) unknownQuestions++;
+  // });
 
-  let unknownQuestions = 0;
-  data.questions.forEach((x) => {
-    if (!x.isVisited) unknownQuestions++;
-  });
+  // let discoveredQuestions = 0;
+  // data.questions.forEach((x) => {
+  //   if (x.isVisited) discoveredQuestions++;
+  // });
 
-  let discoveredQuestions = 0;
-  data.questions.forEach((x) => {
-    if (x.isVisited) discoveredQuestions++;
-  });
-
-  let answeredQuestions = 0;
-  data.questions.forEach((x) => {
-    if (x.isAnswered) answeredQuestions++;
-  });
+  // let answeredQuestions = 0;
+  // data.questions.forEach((x) => {
+  //   if (x.isAnswered) answeredQuestions++;
+  // });
 
   return (
     <SafeAreaView style={styles.container}>
       <MapView
         style={styles.map}
         initialRegion={{
-          latitude: data.questions[0]?.latitude,
-          longitude: data.questions[0]?.longitude,
+          latitude: quiz.questions[0]?.latitude,
+          longitude: quiz.questions[0]?.longitude,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
@@ -67,8 +72,8 @@ export default function MapScreen({
           title={'Spelare'}
         />
 
-        {data.questions.map((prop) => {
-          if (prop.isAnswered) {
+        {quiz.questions.map((prop) => {
+          if (answers.some((a) => a.id == prop.id)) {
             // ANSWERED MARKER
             return (
               <Marker
@@ -82,7 +87,7 @@ export default function MapScreen({
                 description={prop.question}
               />
             );
-          } else if (prop.isVisited && !prop.isAnswered) {
+          } else if (unlockedQuestions.some((id) => id === prop.id)) {
             // FOUND MARKER
             return (
               <Marker
@@ -96,7 +101,7 @@ export default function MapScreen({
                 description={prop.question}
               />
             );
-          } else if (!prop.isVisited) {
+          } else {
             // NOT FOUND ANSWER
             return (
               <Marker
@@ -154,19 +159,19 @@ export default function MapScreen({
         )} */}
       {/* </MapView> */}
 
-      <BigText textStyles={{ color: coltheme.cyan }}>{data.title}</BigText>
+      <BigText textStyles={{ color: coltheme.cyan }}>{quiz.title}</BigText>
 
       <View style={styles.legendItem}>
         <MaterialIcons name="circle" size={24} color={coltheme.green} />
         <SmallText textStyles={{ margin: 10 }}>
-          Besvarade frågor: {answeredQuestions}/{discoveredQuestions}
+          Besvarade frågor: {answers.length}/{unlockedQuestions.length}
         </SmallText>
       </View>
       <View style={styles.legendItem}>
         <MaterialIcons name="circle" size={24} color={coltheme.red} />
         <SmallText textStyles={{ margin: 10 }}>
-          Oupptäckta frågor: {totalQuestions - discoveredQuestions}/
-          {totalQuestions}
+          Oupptäckta frågor: {quiz.questions.length - unlockedQuestions.length}/
+          {quiz.questions.length}
         </SmallText>
       </View>
     </SafeAreaView>

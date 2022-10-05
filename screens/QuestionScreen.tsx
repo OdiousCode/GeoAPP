@@ -15,12 +15,10 @@ export default function QuestionScreen({
   navigation,
   route,
 }: QuestionScreenProps<'QuestionScreen'>) {
-  const { quiz, answerQuestion } = useQuiz();
+  const { quiz, answerQuestion, answers } = useQuiz();
 
-  let question = quiz.activeQuiz.questions.find(
-    (p) => p.id === route.params.id
-  );
-  let answer = quiz.answers.find((a) => a.id === route.params.id);
+  let question = quiz.questions.find((p) => p.id === route.params.id);
+  let answer = answers.find((a) => a.id === route.params.id);
 
   if (!question) {
     return (
@@ -29,47 +27,44 @@ export default function QuestionScreen({
         <Button title="Gå tillbaka" onPress={() => navigation.goBack()} />
       </SafeAreaView>
     );
-  } else {
-    return (
-      <View style={styles.screen}>
-        <BigText>
-          {question?.id}. {question?.title}
-        </BigText>
-        <SmallText textStyles={{ fontSize: 20 }}>
-          {question?.question}
-        </SmallText>
-        <View>
-          {question.answers.map((prop, questionChoices) => {
-            return answer?.answer === questionChoices ? (
-              <RadioButton
-                isSelected={true}
-                onPress={() => {
-                  navigation.goBack();
-                }}
-                label={prop}
-                value={questionChoices.toString()}
-                key={questionChoices}
-              />
-            ) : (
-              <RadioButton
-                isSelected={false}
-                onPress={() => {
-                  answerQuestion(question.id, questionChoices);
-                  navigation.goBack();
-                }}
-                label={prop}
-                value={questionChoices.toString()}
-                key={questionChoices}
-              />
-            );
-          })}
-
-          {/* <RadioButton isSelected={true} onPress={() => selectedAnswer = key.toString()} label={prop} value={key} /> */}
-        </View>
-        <Button title="Gå tillbaka" onPress={() => navigation.goBack()} />
-      </View>
-    );
   }
+  return (
+    <View style={styles.screen}>
+      <BigText>
+        {question.id}. {question.title}
+      </BigText>
+      <SmallText textStyles={{ fontSize: 20 }}>{question?.question}</SmallText>
+      <View>
+        {question.answerAlternatives.map((prop, questionChoices) => {
+          return answer?.answer === questionChoices ? (
+            <RadioButton
+              isSelected={true}
+              onPress={() => {
+                navigation.goBack();
+              }}
+              label={prop}
+              value={questionChoices.toString()}
+              key={questionChoices}
+            />
+          ) : (
+            <RadioButton
+              isSelected={false}
+              onPress={() => {
+                answerQuestion(question!.id, questionChoices);
+                navigation.goBack();
+              }}
+              label={prop}
+              value={questionChoices.toString()}
+              key={questionChoices}
+            />
+          );
+        })}
+
+        {/* <RadioButton isSelected={true} onPress={() => selectedAnswer = key.toString()} label={prop} value={key} /> */}
+      </View>
+      <Button title="Gå tillbaka" onPress={() => navigation.goBack()} />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

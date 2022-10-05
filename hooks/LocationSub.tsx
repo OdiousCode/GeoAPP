@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as Location from 'expo-location';
-import { schedulePushNotification } from '../helper/functions/Notification';
+import { schedulePushNotification } from '../utils/functions/Notification';
 import { useQuiz } from '../context/QuizContext';
 import { QuizWalk } from '../data/data';
 
