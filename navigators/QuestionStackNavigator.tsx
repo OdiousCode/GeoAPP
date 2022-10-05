@@ -8,21 +8,21 @@ import React from 'react';
 import { Pressable } from 'react-native';
 import QuestionScreen from '../screens/QuestionScreen';
 import ResultScreen from '../screens/ResultsScreen';
-
+import { RootStackParamList } from './RootStackNavigator';
 import { TabScreenProps } from './TabNavigator';
 
-export type HomeStackParamList = {
+export type QuestionStackParamList = {
   QuestionScreen: { id: number };
   ResultScreen: undefined;
 };
 
-export type QuestionScreenProps<Screen extends keyof HomeStackParamList> =
+export type QuestionScreenProps<Screen extends keyof QuestionStackParamList> =
   CompositeScreenProps<
-    NativeStackScreenProps<HomeStackParamList, Screen>,
-    TabScreenProps<'OverviewScreen'>
+    NativeStackScreenProps<QuestionStackParamList, Screen>,
+    NativeStackScreenProps<RootStackParamList>
   >;
 
-const Stack = createNativeStackNavigator<HomeStackParamList>();
+const Stack = createNativeStackNavigator<QuestionStackParamList>();
 
 export default function HomeStackNavigator() {
   return (

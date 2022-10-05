@@ -63,6 +63,7 @@ export default function OverviewScreen({
           if (prop.isVisited) {
             // this quiz is found
             // {quiz.answers.find((q) => q.id == prop.id)?.answer}
+
             return (
               <Pressable
                 onPress={() => {
@@ -72,9 +73,7 @@ export default function OverviewScreen({
                   });
                 }}
               >
-                <MediumText textStyles={{ color: coltheme.cyan }}>
-                  #{prop.id} / TEMP A / Det var en...
-                </MediumText>
+                <MediumText>#{prop.id} / TEMP A / Det var en...</MediumText>
               </Pressable>
             );
           } else {
