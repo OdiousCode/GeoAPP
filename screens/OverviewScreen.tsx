@@ -9,6 +9,7 @@ import { useQuiz } from '../context/QuizContext';
 import { getData, QuizWalk } from '../data/data';
 import { TabScreenProps } from '../navigators/TabNavigator';
 import { BigText, MediumText, SmallText } from '../components/TextTemplates';
+import { ThemeConsumer } from 'styled-components/native';
 
 type Props = NativeStackScreenProps<RootTabsParamList, 'Overview'>;
 
