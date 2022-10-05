@@ -1,16 +1,11 @@
-import { NavigateBefore, SocialDistance } from '@mui/icons-material';
-import { style } from '@mui/system';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
-import { Button, StyleSheet, Text, View, Image, TextInput } from 'react-native';
+import { Image, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { coltheme } from '../components/coltheme';
 import RegularButton from '../components/RegularButton';
-import { MediumText, SmallText } from '../components/TextTemplates';
+import { SmallText } from '../components/TextTemplates';
 import { useQuiz } from '../context/QuizContext';
 import { getData } from '../data/data';
-import useLocation from '../hooks/LocationSub';
-import SubscribeToSteps from '../hooks/Pedometer';
 import { RootScreenProps } from '../navigators/RootStackNavigator';
 
 export default function LoginScreen({
@@ -22,34 +17,35 @@ export default function LoginScreen({
 
   return (
     <SafeAreaView style={[styles.container]}>
-      <Image source={require('../assets/geoappsplash.png')}></Image>
-      <View style={{ margin: 10 }}>
-        <Text style={[styles.bigText]}>TipsPROmenader 2000</Text>
-      </View>
+      <View style={styles.container}>
+        <View style={{ margin: 10 }}>
+          <Text style={[styles.bigText]}>TipsPROmenader 2000</Text>
+        </View>
+        <View style={{ margin: 2 }}>
+          <SmallText> Code </SmallText>
+        </View>
+        <View style={[styles.inputContainer, { margin: 10 }]}>
+          <TextInput
+            style={[styles.smallText]}
+            keyboardType="numeric"
+            onChangeText={(newText) => setText(+newText)}
+          ></TextInput>
+        </View>
+        <RegularButton
+          onPress={() => {
+            //TODO error handling
 
-      <View style={{ margin: 2 }}>
-        <SmallText> Code </SmallText>
+            let data = getData(text);
+            if (data != undefined) {
+              setQuizWalk(data);
+              navigation.navigate('TabNavigator', { screen: 'HomeScreen' });
+            }
+          }}
+        >
+          Logga in
+        </RegularButton>
+        <Image source={require('../assets/geoappsplash.png')}></Image>
       </View>
-      <View style={[styles.inputContainer, { margin: 2 }]}>
-        <TextInput
-          style={[styles.smallText]}
-          keyboardType="numeric"
-          onChangeText={(newText) => setText(+newText)}
-        ></TextInput>
-      </View>
-      <RegularButton
-        onPress={() => {
-          //TODO error handling
-
-          let data = getData(text);
-          if (data != undefined) {
-            setQuizWalk(data);
-            navigation.navigate('TabNavigator', { screen: 'HomeScreen' });
-          }
-        }}
-      >
-        Logga in
-      </RegularButton>
       {/* <View style={{ margin: 2 }}>
         <Text style={[styles.smallText]}>Skapa en quiz?</Text>
       </View> */}
@@ -60,13 +56,13 @@ export default function LoginScreen({
   );
 }
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
     backgroundColor: coltheme.background,
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
   },
   buttonContainer: {
     flex: 1,
@@ -77,19 +73,16 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   inputContainer: {
-    flex: 1,
-    bottom: 0,
-    // backgroundColor: '#fff',
+    backgroundColor: coltheme.white,
     borderColor: coltheme.secondary,
-    // border: '1px solid ${coltheme.primary}',
-    borderWidth: 4,
-    alignItems: 'center',
-    justifyContent: 'flex-end',
+    borderRadius: 4,
+    borderWidth: 3,
+    maxHeight: 60,
   },
   smallText: {
     fontSize: 13,
     fontWeight: 'normal',
-    color: coltheme.primary,
+    color: coltheme.background,
   },
   bigText: { fontSize: 29, fontWeight: 'bold', color: coltheme.secondary },
 });
