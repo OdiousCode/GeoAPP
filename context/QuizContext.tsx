@@ -6,7 +6,8 @@ import React, {
   useState,
 } from 'react';
 import { QuizWalk } from '../data/data';
-import useLocation, { calcDistanceFromLongLat } from '../hooks/LocationSub';
+import useLocation from '../hooks/LocationSub';
+import { calcDistanceFromLongLat } from '../utils/functions/calcDistanceFromLongLat';
 import useSubscribeToSteps from '../hooks/Pedometer';
 import * as Location from 'expo-location';
 import { LocationObjectCoords } from 'expo-location';
@@ -75,12 +76,10 @@ function QuizProvider({ children }: Props) {
   const [quiz, setQuiz] = useState(initalState.quiz);
   const [answers, setAnswers] = useState<QuizAnswer[]>([]);
   const [unlockedQuestions, setUnlockedQuestions] = useState<number[]>([]);
-  // Hook för location - Alternativt hela use effecten
-  const steps = useSubscribeToSteps();
-  const location = useLocation();
-  // const [quiz, setQuiz] = useUpdatedQuiz(location, initalState.quiz);
 
-  // UseEffect Location ->
+  const steps = useSubscribeToSteps();
+
+  const location = useLocation();
   useEffect(() => {
     verifyMovement();
   }, [location]);

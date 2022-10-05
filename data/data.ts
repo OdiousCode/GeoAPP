@@ -26,7 +26,7 @@ const mockQuizWalks: QuizWalk[] = [
         latitude: 57.721111,
         longitude: 12.940278,
         answerAlternatives: ['80,000', '155,000', '115,000'],
-        correctAnswer: 3,
+        correctAnswer: 2,
       },
       {
         id: 2,
@@ -39,7 +39,7 @@ const mockQuizWalks: QuizWalk[] = [
           'Nils Göransson Stiernsköld',
           'Kung Gustav I Eriksson (Vasa)',
         ],
-        correctAnswer: 1,
+        correctAnswer: 0,
       },
       {
         id: 3,
@@ -49,7 +49,7 @@ const mockQuizWalks: QuizWalk[] = [
         latitude: 57.736111,
         longitude: 12.947278,
         answerAlternatives: ['Earthbound', 'Barbados', 'Antiloop'],
-        correctAnswer: 1,
+        correctAnswer: 0,
       },
       {
         id: 4,
@@ -59,7 +59,7 @@ const mockQuizWalks: QuizWalk[] = [
         latitude: 57.734111,
         longitude: 12.945278,
         answerAlternatives: ['Elfsborg IF', 'Borås Atlet & IS', 'IK Ymer'],
-        correctAnswer: 2,
+        correctAnswer: 1,
       },
       {
         id: 5,
@@ -69,7 +69,7 @@ const mockQuizWalks: QuizWalk[] = [
         latitude: 57.731111,
         longitude: 12.941278,
         answerAlternatives: ['1937', '1875', '1909'],
-        correctAnswer: 3,
+        correctAnswer: 2,
       },
       {
         id: 6,
@@ -83,7 +83,7 @@ const mockQuizWalks: QuizWalk[] = [
           'Göran Persson',
           'Thorbjörn Fälldin',
         ],
-        correctAnswer: 1,
+        correctAnswer: 0,
       },
       {
         id: 7,
@@ -97,7 +97,7 @@ const mockQuizWalks: QuizWalk[] = [
           'Nikolaj Vladimirovitj Drozdetskij',
           'Ivan Sergei Drottodoski',
         ],
-        correctAnswer: 2,
+        correctAnswer: 1,
       },
       {
         id: 8,
@@ -107,7 +107,7 @@ const mockQuizWalks: QuizWalk[] = [
         latitude: 57.738111,
         longitude: 12.948278,
         answerAlternatives: ['Tre ton', 'Två ton', 'Ett halvt ton'],
-        correctAnswer: 1,
+        correctAnswer: 0,
       },
       {
         id: 9,
@@ -117,7 +117,7 @@ const mockQuizWalks: QuizWalk[] = [
         latitude: 57.72543040275503,
         longitude: 12.936820470774293,
         answerAlternatives: ['1880', '1750', '1826'],
-        correctAnswer: 3,
+        correctAnswer: 2,
       },
     ],
   },
