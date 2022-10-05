@@ -42,7 +42,6 @@ export default function useLocation() {
           },
           (location) => {
             setLocation(location);
-            console.log(location);
           }
         );
       };

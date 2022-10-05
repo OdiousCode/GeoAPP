@@ -84,6 +84,7 @@ function QuizProvider({ children }: Props) {
 
   // UseEffect Location ->
   useEffect(() => {
+    console.log('Use effect ran');
     if (quiz.activeQuiz.id != 0) {
       console.log('valid Quiz Id');
       for (let i = 0; i < quiz.activeQuiz.questions.length; i++) {
@@ -94,7 +95,6 @@ function QuizProvider({ children }: Props) {
         const lat2 = quiz.activeQuiz.questions[i].latitude;
         const long2 = quiz.activeQuiz.questions[i].longitude;
 
-        //console.log(i);
         console.log(
           'Distance = ' + calcDistanceFromLongLat(lat1, long1, lat2, long2, 'K')
         );
@@ -120,7 +120,7 @@ function QuizProvider({ children }: Props) {
         }
       }
     }
-  }, []);
+  }, [location]);
 
   const setQuizWalk = (activeQuiz: QuizWalk) => {
     let item: QuizItem = { activeQuiz: activeQuiz, answers: [] };
