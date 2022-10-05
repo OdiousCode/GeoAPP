@@ -11,7 +11,6 @@ export default function useSubscribeToSteps() {
   useEffect(() => {
     let subscribe = () => {
       const sub = Pedometer.watchStepCount((result) => {
-        // updateStepCount(result.steps);
         updateStepCount(result.steps);
       });
     };

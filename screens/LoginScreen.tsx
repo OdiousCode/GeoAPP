@@ -7,7 +7,7 @@ import { coltheme } from '../components/coltheme';
 import RegularButton from '../components/RegularButton';
 import { useQuiz } from '../context/QuizContext';
 import { getData } from '../data/data';
-import subscribeToLocation from '../hooks/LocationSub';
+import useLocation from '../hooks/LocationSub';
 import SubscribeToSteps from '../hooks/Pedometer';
 import { RootScreenProps } from '../navigators/RootStackNavigator';
 
@@ -16,8 +16,7 @@ export default function LoginScreen({
   route,
 }: RootScreenProps<'Login'>) {
   const { quiz, answerQuestion, setQuizWalk } = useQuiz();
-  subscribeToLocation();
-  SubscribeToSteps();
+
   return (
     <SafeAreaView style={[styles.container]}>
       <Image source={require('../assets/geoappsplash.png')}></Image>
@@ -29,12 +28,12 @@ export default function LoginScreen({
       </View> */}
       <RegularButton
         onPress={() => {
+          //TODO  make data = getData(Input)
           let data = getData(0);
           setQuizWalk(data);
           navigation.navigate('TabNavigator', { screen: 'HomeScreen' });
         }}
       >
-        {' '}
         Logga in
       </RegularButton>
       {/* <View style={{ margin: 2 }}>
