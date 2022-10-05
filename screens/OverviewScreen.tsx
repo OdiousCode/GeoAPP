@@ -1,15 +1,13 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
-import { RootTabsParamList } from '../App';
-import RegularButton from '../components/RegularButton';
-import { coltheme } from '../components/coltheme';
+import { Alert, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useQuiz } from '../context/QuizContext';
-import { QuizWalk } from '../data/data';
-import { TabScreenProps } from '../navigators/TabNavigator';
+import { RootTabsParamList } from '../App';
+import { coltheme } from '../components/coltheme';
+import RegularButton from '../components/RegularButton';
 import { BigText, MediumText, SmallText } from '../components/TextTemplates';
-import { ThemeConsumer } from 'styled-components/native';
+import { useQuiz } from '../context/QuizContext';
+import { TabScreenProps } from '../navigators/TabNavigator';
 
 type Props = NativeStackScreenProps<RootTabsParamList, 'Overview'>;
 
@@ -43,16 +41,18 @@ export default function OverviewScreen({
       <View style={{ margin: 10 }}>
         <MediumText>Steg {steps}</MediumText>
       </View>
-      <View style={{ margin: 20 }}>
+      <ScrollView style={styles.allQuestions}>
         {quiz.questions.map((question) => {
           if (unlockedQuestions.includes(question.id)) {
             // this quiz is found
             let answerInNumber = answers.find(
               (q) => q.id == question.id
             )?.answer;
-            let answerInText = answerInNumber
-              ? question.answerAlternatives[answerInNumber]
-              : 'Ej Besvarad';
+
+            let answerInText = 'Ej Besvarad';
+            if (answerInNumber != undefined) {
+              answerInText = question.answerAlternatives[answerInNumber];
+            }
 
             return (
               <View key={question.id} style={{ margin: 5 }}>
@@ -65,24 +65,43 @@ export default function OverviewScreen({
                     });
                   }}
                 >
-                  <MediumText textStyles={{ color: coltheme.cyan }}>
-                    #{question.id} / {answerInText}/
-                    {question.question.slice(0, 19)}
+                  <MediumText
+                    textStyles={{ color: coltheme.cyan, textAlign: 'center' }}
+                  >
+                    #{question.id} / {answerInText} /{' '}
+                    {question.title?.slice(0, 19)}
                   </MediumText>
                 </Pressable>
               </View>
             );
           } else {
-            return <MediumText key={question.id}> ?? / ? / ?????</MediumText>;
+            return (
+              <MediumText
+                key={question.id}
+                textStyles={{ textAlign: 'center' }}
+              >
+                {' '}
+                ?? / ? / ?????
+              </MediumText>
+            );
           }
         })}
-      </View>
+      </ScrollView>
       {/* Behöver Datan ifrån context här å sen mappa ut den */}
       <RegularButton
         onPress={() => {
-          navigation.navigate('QuestionStackNavigator', {
-            screen: 'ResultScreen',
-          });
+          Alert.alert('Lämna in', 'Är du säker på att du vill lämna in?', [
+            { text: 'Avbryt', style: 'cancel' },
+            {
+              text: 'Lämna in',
+              style: 'default',
+              onPress: () => {
+                navigation.navigate('QuestionStackNavigator', {
+                  screen: 'ResultScreen',
+                });
+              },
+            },
+          ]);
         }}
       >
         Lämna in
@@ -97,7 +116,11 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: coltheme.background,
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
   },
-  allQuestions: {},
+  allQuestions: {
+    marginVertical: 40,
+    width: '100%',
+    flex: 1,
+  },
 });

@@ -1,13 +1,13 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button, StyleSheet, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootTabsParamList } from '../App';
 import { coltheme } from '../components/coltheme';
 import RadioButton from '../components/radioButton';
 import { BigText, SmallText } from '../components/TextTemplates';
 import { useQuiz } from '../context/QuizContext';
 import { QuestionScreenProps } from '../navigators/QuestionStackNavigator';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 type Props = NativeStackScreenProps<RootTabsParamList, 'Question'>;
 
@@ -29,11 +29,15 @@ export default function QuestionScreen({
     );
   }
   return (
-    <View style={styles.screen}>
+    <SafeAreaView style={styles.screen}>
       <BigText>
         {question.id}. {question.title}
       </BigText>
-      <SmallText textStyles={{ fontSize: 20 }}>{question?.question}</SmallText>
+      <SmallText
+        textStyles={{ fontSize: 20, textAlign: 'center', marginHorizontal: 30 }}
+      >
+        {question?.question}
+      </SmallText>
       <View>
         {question.answerAlternatives.map((prop, questionChoices) => {
           return answer?.answer === questionChoices ? (
@@ -63,7 +67,7 @@ export default function QuestionScreen({
         {/* <RadioButton isSelected={true} onPress={() => selectedAnswer = key.toString()} label={prop} value={key} /> */}
       </View>
       <Button title="Gå tillbaka" onPress={() => navigation.goBack()} />
-    </View>
+    </SafeAreaView>
   );
 }
 

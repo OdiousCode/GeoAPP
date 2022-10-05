@@ -1,10 +1,12 @@
-import { NavigateBefore } from '@mui/icons-material';
+import { NavigateBefore, SocialDistance } from '@mui/icons-material';
+import { style } from '@mui/system';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, StyleSheet, Text, View, Image, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { coltheme } from '../components/coltheme';
 import RegularButton from '../components/RegularButton';
+import { MediumText, SmallText } from '../components/TextTemplates';
 import { useQuiz } from '../context/QuizContext';
 import { getData } from '../data/data';
 import useLocation from '../hooks/LocationSub';
@@ -16,6 +18,7 @@ export default function LoginScreen({
   route,
 }: RootScreenProps<'Login'>) {
   const { quiz, answerQuestion, setQuizWalk } = useQuiz();
+  const [text, setText] = useState(0);
 
   return (
     <SafeAreaView style={[styles.container]}>
@@ -23,13 +26,22 @@ export default function LoginScreen({
       <View style={{ margin: 10 }}>
         <Text style={[styles.bigText]}>TipsPROmenader 2000</Text>
       </View>
-      {/* <View style={{ margin: 2 }}>
-        <TextInput style={[styles.smallText]}>Ange kod här</TextInput>
-      </View> */}
+
+      <View style={{ margin: 2 }}>
+        <SmallText> Code </SmallText>
+      </View>
+      <View style={[styles.inputContainer, { margin: 2 }]}>
+        <TextInput
+          style={[styles.smallText]}
+          keyboardType="numeric"
+          onChangeText={(newText) => setText(+newText)}
+        ></TextInput>
+      </View>
       <RegularButton
         onPress={() => {
           //TODO error handling
-          let data = getData(1);
+
+          let data = getData(text);
           if (data != undefined) {
             setQuizWalk(data);
             navigation.navigate('TabNavigator', { screen: 'HomeScreen' });
@@ -61,6 +73,16 @@ const styles = StyleSheet.create({
     bottom: 0,
     marginBottom: 10,
     // backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
+  inputContainer: {
+    flex: 1,
+    bottom: 0,
+    // backgroundColor: '#fff',
+    borderColor: coltheme.secondary,
+    // border: '1px solid ${coltheme.primary}',
+    borderWidth: 4,
     alignItems: 'center',
     justifyContent: 'flex-end',
   },

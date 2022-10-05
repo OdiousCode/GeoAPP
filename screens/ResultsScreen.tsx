@@ -27,7 +27,9 @@ export default function ResultScreen({
   answers.forEach((answer) => {
     let questionInRelevence = quiz.questions.find((q) => q.id === answer.id);
     if (questionInRelevence) {
-      if (questionInRelevence.correctAnswer === answer.answer) correctAnswers++;
+      if (questionInRelevence.correctAnswer === answer.answer) {
+        correctAnswers++;
+      }
     }
   });
 

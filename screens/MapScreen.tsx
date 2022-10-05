@@ -16,41 +16,7 @@ export default function MapScreen({
   route,
 }: TabScreenProps<'MapScreen'>) {
   //data = XXX.fetch(route.params.quizWalkId);
-  const {
-    quiz,
-    answerQuestion,
-    setQuizWalk,
-    steps,
-    location,
-    answers,
-    unlockedQuestions,
-  } = useQuiz();
-
-  // let avgLat: number = 0;
-  // let avgLong: number = 0;
-
-  // data.questions.forEach((q) => {
-  //   avgLat += q.latitude;
-  //   avgLong += q.longitude;
-  // });
-
-  // avgLat /= data.questions.length;
-  // avgLong /= data.questions.length;
-
-  // let unknownQuestions = 0;
-  // data.questions.forEach((x) => {
-  //   if (!x.isVisited) unknownQuestions++;
-  // });
-
-  // let discoveredQuestions = 0;
-  // data.questions.forEach((x) => {
-  //   if (x.isVisited) discoveredQuestions++;
-  // });
-
-  // let answeredQuestions = 0;
-  // data.questions.forEach((x) => {
-  //   if (x.isAnswered) answeredQuestions++;
-  // });
+  const { quiz, location, answers, unlockedQuestions } = useQuiz();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -119,59 +85,18 @@ export default function MapScreen({
         })}
       </MapView>
 
-      {/* <Marker
-          coordinate={{
-            latitude: data.questions[0].latitude,
-            longitude: data.questions[0].longitude,
-          }}
-          pinColor={coltheme.green}
-          title={data.questions[0].title}
-          description={data.questions[0].question}
-        /> */}
-      {/* <Marker
-          coordinate={{
-            latitude: data.questions[1].latitude,
-            longitude: data.questions[1].longitude,
-          }}
-          pinColor={coltheme.red}
-          title={data.questions[1].title}
-          description={data.questions[1].question}
-        /> */}
-      {/* {data.questions[2].isVisited ? (
-          <Marker
-            coordinate={{
-              latitude: data.questions[2].latitude,
-              longitude: data.questions[2].longitude,
-            }}
-            pinColor={coltheme.red}
-            title={data.questions[2].title}
-            description={data.questions[2].question}
-          />
-        ) : (
-          <Marker
-            coordinate={{
-              latitude: data.questions[2].latitude,
-              longitude: data.questions[2].longitude,
-            }}
-            pinColor={coltheme.red}
-            title={'?'}
-          />
-        )} */}
-      {/* </MapView> */}
-
       <BigText textStyles={{ color: coltheme.cyan }}>{quiz.title}</BigText>
 
       <View style={styles.legendItem}>
         <MaterialIcons name="circle" size={24} color={coltheme.green} />
         <SmallText textStyles={{ margin: 10 }}>
-          Besvarade frågor: {answers.length}/{unlockedQuestions.length}
+          Besvarade frågor: {answers.length}/{quiz.questions.length}
         </SmallText>
       </View>
       <View style={styles.legendItem}>
         <MaterialIcons name="circle" size={24} color={coltheme.red} />
         <SmallText textStyles={{ margin: 10 }}>
-          Oupptäckta frågor: {quiz.questions.length - unlockedQuestions.length}/
-          {quiz.questions.length}
+          Upptäckta frågor: {unlockedQuestions.length}/{quiz.questions.length}
         </SmallText>
       </View>
     </SafeAreaView>
@@ -196,25 +121,4 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginLeft: 20,
   },
-
-  /* logo: {
-    width: 305,
-    height: 159,
-      <View >
-    marginBottom: 10,
-  },
-  instructions: {
-    color: '#888',
-    fontSize: 18,
-    marginHorizontal: 15,
-  },
-  button: {
-    backgroundColor: 'blue',
-    padding: 20,
-    borderRadius: 5,
-  },
-  buttonText: {
-    fontSize: 20,
-    color: '#fff',
-  }, */
 });
