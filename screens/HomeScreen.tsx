@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, Linking } from 'react-native';
 import { RootTabsParamList } from '../App';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { QuizWalk } from '../data/data';
@@ -16,7 +16,7 @@ export default function HomeScreen({
   navigation,
   route,
 }: TabScreenProps<'HomeScreen'>) {
-  const { quiz, answerQuestion, setQuizWalk, answers } = useQuiz();
+  const { quiz, answerQuestion, setQuizWalk, answers, steps } = useQuiz();
   return (
     <SafeAreaView style={[styles.container]}>
       <Image
@@ -32,31 +32,22 @@ export default function HomeScreen({
         </SmallText>
       </View>
       <View style={{ margin: 10 }}>
-        <SmallText>Antal steg: 4481</SmallText>
+        <SmallText>Antal steg: {steps}</SmallText>
       </View>
       <View style={styles.buttonContainer}>
         <RegularButton
           btnStyles={{ width: 100 }}
           onPress={() =>
-            navigation.navigate('QuestionStackNavigator', {
-              screen: 'ResultScreen',
-              initial: true,
+            Linking.canOpenURL(
+              'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+            ).then((supported) => {
+              if (supported) {
+                Linking.openURL('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+              }
             })
           }
         >
-          Lämna in
-        </RegularButton>
-        <RegularButton
-          btnStyles={{ width: 200, backgroundColor: coltheme.red }}
-          onPress={() =>
-            navigation.navigate('QuestionStackNavigator', {
-              initial: true,
-              screen: 'QuestionScreen',
-              params: { id: 21 },
-            })
-          }
-        >
-          Try access invalid question
+          Buy me a Coffe 🥤
         </RegularButton>
       </View>
     </SafeAreaView>
