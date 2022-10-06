@@ -146,8 +146,8 @@ function QuizProvider({ children }: Props) {
           calcDistanceFromLongLat(lat1, long1, lat2, long2, 'K') <=
             minDistanceToTrigger
         ) {
-          schedulePushNotification('TipsPro!', 'Du har hittat en ny punkt!');
           unlockQuestion(question.id);
+          schedulePushNotification('TipsPro!', 'Du har hittat en ny punkt!');
         }
       }
     }
