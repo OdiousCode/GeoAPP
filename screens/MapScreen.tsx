@@ -1,7 +1,7 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, View, Image } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootTabsParamList } from '../App';
@@ -34,7 +34,7 @@ export default function MapScreen({
             latitude: location.coords.latitude,
             longitude: location.coords.longitude,
           }}
-          pinColor={coltheme.white}
+          pinColor={'#000000'}
           title={'Spelare'}
         />
 
@@ -48,7 +48,7 @@ export default function MapScreen({
                   latitude: prop.latitude,
                   longitude: prop.longitude,
                 }}
-                pinColor={coltheme.green}
+                image={require('../assets/AnsweredQuestion.png')}
                 title={prop.title}
                 description={prop.question}
               />
@@ -62,7 +62,7 @@ export default function MapScreen({
                   latitude: prop.latitude,
                   longitude: prop.longitude,
                 }}
-                pinColor={coltheme.orange}
+                image={require('../assets/uAnsweredQuestion.png')}
                 title={prop.title}
                 description={prop.question}
               />
@@ -76,7 +76,7 @@ export default function MapScreen({
                   latitude: prop.latitude,
                   longitude: prop.longitude,
                 }}
-                pinColor={coltheme.red}
+                image={require('../assets/notFoundQuestion.png')}
                 title={'??'}
                 description={'????'}
               />
@@ -88,15 +88,31 @@ export default function MapScreen({
       <BigText textStyles={{ color: coltheme.cyan }}>{quiz.title}</BigText>
 
       <View style={styles.legendItem}>
-        <MaterialIcons name="circle" size={24} color={coltheme.green} />
-        <SmallText textStyles={{ margin: 10 }}>
-          Besvarade frågor: {answers.length}/{quiz.questions.length}
+        <Image
+          style={{ width: 20, height: 20 }}
+          source={require('../assets/AnsweredQuestion.png')}
+        />
+        <SmallText textStyles={{ margin: 5 }}>
+          Besvarade frågor: {answers.length}
         </SmallText>
       </View>
       <View style={styles.legendItem}>
-        <MaterialIcons name="circle" size={24} color={coltheme.red} />
-        <SmallText textStyles={{ margin: 10 }}>
-          Upptäckta frågor: {unlockedQuestions.length}/{quiz.questions.length}
+        <Image
+          style={{ width: 20, height: 20 }}
+          source={require('../assets/notFoundQuestion.png')}
+        />
+        <SmallText textStyles={{ margin: 5 }}>
+          Ej upptäckta frågor:{' '}
+          {quiz.questions.length - unlockedQuestions.length}
+        </SmallText>
+      </View>
+      <View style={styles.legendItem}>
+        <Image
+          style={{ width: 20, height: 20 }}
+          source={require('../assets/uAnsweredQuestion.png')}
+        />
+        <SmallText textStyles={{ margin: 5 }}>
+          Obesvarade frågor: {unlockedQuestions.length - answers.length}
         </SmallText>
       </View>
     </SafeAreaView>
