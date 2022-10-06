@@ -14,6 +14,8 @@
 
 Vi har valt att hålla oss till en färdig förkodad quiz, medans tanken var att man ska kunna skapa egna quizes som t.ex en Administratör.
 
+Planen var att ha en stegräknare med hjälp av expo's Pedometer komponent, fungerar utmärkt på både iOS och äldre Android. Dock upptäckte vi att för nyare modeller av android(och vissa andra telefonmodeller), så duger inte denna komponenten. Utan man måste använda sig utav Google Fit API, då man behöver att ansluta appen mot google fit, skapa en nyckel och många andra steg som kändes väldigt overkill för vår lilla app. Så vi valde att nöja oss där, då det funkar på vissa modeller. Men om vi någonsin planerar på att jobba vidare med appen, så är det definitivt aktuellt.
+
 # Komponenter vi har nyttjat
 
 ## React-native komponenter
