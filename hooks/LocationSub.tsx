@@ -26,10 +26,16 @@ export default function useLocation() {
         const sub = Location.watchPositionAsync(
           {
             accuracy: Location.Accuracy.High,
-            distanceInterval: 7,
+            distanceInterval: 1,
           },
           (_location) => {
             setLocation(_location);
+            console.log(
+              'Current player pos, Lat: ' +
+                _location.coords.latitude +
+                ' Long: ' +
+                _location.coords.longitude
+            );
           }
         );
       };

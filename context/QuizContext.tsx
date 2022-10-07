@@ -130,7 +130,6 @@ function QuizProvider({ children }: Props) {
 
   function verifyMovement() {
     if (quiz.id != 0) {
-      console.log('valid Quiz Id');
       for (let i = 0; i < quiz.questions.length; i++) {
         // check every question to see if standing on it
         const question = quiz.questions[i];
@@ -146,8 +145,23 @@ function QuizProvider({ children }: Props) {
           calcDistanceFromLongLat(lat1, long1, lat2, long2, 'K') <=
             minDistanceToTrigger
         ) {
-          schedulePushNotification('TipsPro!', 'Du har hittat en ny punkt!');
+          console.log(
+            'Q found id: ' +
+              question.id +
+              ' t: ' +
+              question.title +
+              ' lat: ' +
+              question.latitude +
+              ' long: ' +
+              question.longitude
+          );
           unlockQuestion(question.id);
+          schedulePushNotification(
+            'TipsPro!',
+            'Du har hittat en ny fråga!\n' + question.title
+          );
+          console.log('Sent player notification for Q: ' + question.id);
+          return;
         }
       }
     }
