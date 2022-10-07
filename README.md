@@ -95,8 +95,6 @@ Planen var att ha en stegräknare med hjälp av expo's Pedometer komponent, fung
 
 ## Uppgiftsbeskrivning
 
-## GeoAPP
-
 I den här laborationen ska ni i grupp om tre skapa en nativ app med med hjälp av React
 Native (RN), Expo och Typescript. Vad ni väljer att skapa är valfritt däremot ska ni
 använda er av minst 6 stycken RN komponenter och minst 6 stycken från Expo SDK’n.
