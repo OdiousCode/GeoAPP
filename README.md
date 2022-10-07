@@ -25,6 +25,10 @@ Sedan frågar appen efter rättigheter till din location, välj er preferens dä
 
 Då vi ej har gjort mer än ett quiz ännu, så för att komma igång skriv "1" i kod för quiz och logga in, nu är det bara att köra, visa att du är bäst!
 
+Om du inte är så sugen på att ta dig ut och gå för att nå punkterna, så kan du köra en förbestämd rutt i din simulator/emulator. Finns en google-maps rutt-fil under katalogen 'utils' som heter GeoAPPTestRoute.gpx.
+Denna kan du ladda i t.ex android-studio's emulator, välj din emulerade telefon och starta. Sedan i telefonen ta dig till Location settings genom att klicka på "..." sedan location och klicka på "routes" upp i mitten. Välj import GPX/XML och leta fram GeoAPPTestRoute.gpx i projektet under utils.
+Kör den på repeat playback för att vara säker på att frågorna triggas, den rör sig väldigt snabbt nämligen!
+
 # Våra avgränsningar
 
 Då ingen i vår grupp har en Apple-produkt, har vi valt att hålla oss till android uteslutande, ingen möjlighet att testa på iOS dessvärre. Så om ni testar appen i iOS kan det ha oväntade resultat.
