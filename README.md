@@ -1,4 +1,5 @@
 # GeoAPP (Name pending)
+[Github repo](https://github.com/OdiousCode/GeoAPP)
 
 ## Projektmedlemmar
 
@@ -10,7 +11,23 @@
 
 [Hampus Andersson](https://github.com/HampusAndersson01)
 
+# Hur du kör projektet
+
+Först för att få hem alla nödvändiga packages, se till att du står i projektets rootkatalog, skriv 'npm install' ( kräver nodejs installerat ).
+
+Bör ta en liten stund, låt den tugga och hämta hem det som behövs! När detta är klart, kan du sedan skriva 'npm start' så kör den igång projektet.
+
+Efter det har du ett par olika alternativ att få igång själva appen, antingen via emulator eller simulator på datorn. Har du en av dessa, så kan du trycka I i konsollen, för att öppna iOS varianten. A för att öppna android varianten. 
+Eller utifall du vill testa med en fysisk telefon, tryck C för att få fram en QR-kod som du skannar med appen 'expo-go' som finns i appstore/playstore.
+(Värt att notera, då ingen i projektet har en appleprodukt, har vi ej testat denna på iOS!)
+
+Sedan frågar appen efter rättigheter till din location, välj er preferens där, men för att programmet skall fungera bör den tillåtas med något av alternativen. ( Fungerar bäst med fine-location ).
+
+Då vi ej har gjort mer än ett quiz ännu, så för att komma igång skriv "1" i kod för quiz och logga in, nu är det bara att köra, visa att du är bäst!
+
 # Våra avgränsningar
+
+Då ingen i vår grupp har en Apple-produkt, har vi valt att hålla oss till android uteslutande, ingen möjlighet att testa på iOS dessvärre. Så om ni testar appen i iOS kan det ha oväntade resultat.
 
 Vi har valt att hålla oss till en färdig förkodad quiz, medans tanken var att man ska kunna skapa egna quizes som t.ex en Administratör.
 
@@ -46,7 +63,7 @@ Planen var att ha en stegräknare med hjälp av expo's Pedometer komponent, fung
 
 - StatusBar - Ändrar färgen på telefonens statusfält (batteri, nätstyrka osv) och knappfältet på android, i vårt fall så att den är ljus. Eftersom vår app är väldigt mörk.
 
-- MaterialIcons - ikoner :)
+- MaterialIcons - Så vi får ikoner för vår bottomtab navigator.
 
 ## Extern komponent
 
@@ -60,16 +77,17 @@ Planen var att ha en stegräknare med hjälp av expo's Pedometer komponent, fung
       genomförda krav.
 - [x] Git & GitHub har använts
 - [x] Projektmappen innehåller en README.md fil - (läs ovan för mer info)
-- [ ] Uppgiften lämnas in i tid!
-- [ ] Muntlig presentation är genomförd
+- [x] Uppgiften lämnas in i tid!
+- [x] Muntlig presentation är genomförd
 
 ## Krav för väl godkänt:
 
-- [ ] Alla punkter för godkänt är uppfyllda
+- [x] Alla punkter för godkänt är uppfyllda
 - [x] React Navigation används för att skapa en bättre upplevelse i appen.
 - [x] Ytterligare en valfri extern modul används i projektet.
 - [x] Prototyper för applikation tas fram innan den implementeras. Bilder på prototypen
       skall finnas i projektet vid inlämning.
+      (Screenshot finns i roten av projektet, tipspromenader-figma.png)
 
 ## Uppgiftsbeskrivning
 
