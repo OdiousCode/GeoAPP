@@ -17,7 +17,7 @@ export interface QuizWalkQuestion {
 const mockQuizWalks: QuizWalk[] = [
   {
     id: 1,
-    title: 'Djurparks Gången',
+    title: 'Borås CityQuiz',
     questions: [
       {
         id: 1,

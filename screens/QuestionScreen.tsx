@@ -1,15 +1,11 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { Button, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { RootTabsParamList } from '../App';
 import { coltheme } from '../components/coltheme';
 import RadioButton from '../components/radioButton';
 import { BigText, SmallText } from '../components/TextTemplates';
 import { useQuiz } from '../context/QuizContext';
 import { QuestionScreenProps } from '../navigators/QuestionStackNavigator';
-
-type Props = NativeStackScreenProps<RootTabsParamList, 'Question'>;
 
 export default function QuestionScreen({
   navigation,
@@ -63,8 +59,6 @@ export default function QuestionScreen({
             />
           );
         })}
-
-        {/* <RadioButton isSelected={true} onPress={() => selectedAnswer = key.toString()} label={prop} value={key} /> */}
       </View>
       <Button title="Gå tillbaka" onPress={() => navigation.goBack()} />
     </SafeAreaView>

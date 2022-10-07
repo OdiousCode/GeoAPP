@@ -1,29 +1,17 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { Alert, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { RootTabsParamList } from '../App';
 import { coltheme } from '../components/coltheme';
 import RegularButton from '../components/RegularButton';
 import { BigText, MediumText, SmallText } from '../components/TextTemplates';
 import { useQuiz } from '../context/QuizContext';
 import { TabScreenProps } from '../navigators/TabNavigator';
 
-type Props = NativeStackScreenProps<RootTabsParamList, 'Overview'>;
-
 export default function OverviewScreen({
   navigation,
   route,
 }: TabScreenProps<'OverviewScreen'>) {
-  const {
-    quiz,
-    answerQuestion,
-    setQuizWalk,
-    steps,
-    location,
-    answers,
-    unlockedQuestions,
-  } = useQuiz();
+  const { quiz, steps, answers, unlockedQuestions } = useQuiz();
 
   return (
     <SafeAreaView style={[styles.container]}>
@@ -44,7 +32,6 @@ export default function OverviewScreen({
       <ScrollView style={styles.allQuestions}>
         {quiz.questions.map((question) => {
           if (unlockedQuestions.includes(question.id)) {
-            // this quiz is found
             let answerInNumber = answers.find(
               (q) => q.id == question.id
             )?.answer;
@@ -87,7 +74,6 @@ export default function OverviewScreen({
           }
         })}
       </ScrollView>
-      {/* Behöver Datan ifrån context här å sen mappa ut den */}
       <RegularButton
         onPress={() => {
           Alert.alert('Lämna in', 'Är du säker på att du vill lämna in?', [

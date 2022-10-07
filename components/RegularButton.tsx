@@ -1,12 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import styled from 'styled-components/native';
 import {
   GestureResponderEvent,
   StyleProp,
   TextStyle,
   ViewStyle,
 } from 'react-native';
-// custom
+import styled from 'styled-components/native';
 import { coltheme } from './coltheme';
 import { SmallText } from './TextTemplates';
 

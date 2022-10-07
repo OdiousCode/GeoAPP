@@ -1,7 +1,7 @@
+import React, { FunctionComponent } from 'react';
 import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import { coltheme } from './coltheme';
-import React, { FunctionComponent } from 'react';
 
 import { TextProps } from './types';
 
@@ -23,8 +23,6 @@ const StyledText = styled.Text`
 export const SmallText: FunctionComponent<TextProps> = (props) => {
   return <StyledText style={props.textStyles}>{props.children}</StyledText>;
 };
-
-// export SmallText;
 
 const StyledBigText = styled.Text`
   font-size: 37px;
@@ -51,4 +49,3 @@ export const MediumText: FunctionComponent<TextProps> = (props) => {
     </StyledMediumText>
   );
 };
-// export default BigText;

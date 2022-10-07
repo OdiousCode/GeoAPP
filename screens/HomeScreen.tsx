@@ -1,22 +1,17 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { StyleSheet, View, Image, Linking } from 'react-native';
-import { RootTabsParamList } from '../App';
+import { Image, Linking, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { QuizWalk } from '../data/data';
-import { BigText, SmallText } from '../components/TextTemplates';
 import { coltheme } from '../components/coltheme';
 import RegularButton from '../components/RegularButton';
-import { TabScreenProps } from '../navigators/TabNavigator';
+import { BigText, SmallText } from '../components/TextTemplates';
 import { useQuiz } from '../context/QuizContext';
-
-type Props = NativeStackScreenProps<RootTabsParamList, 'Home'>;
+import { TabScreenProps } from '../navigators/TabNavigator';
 
 export default function HomeScreen({
   navigation,
   route,
 }: TabScreenProps<'HomeScreen'>) {
-  const { quiz, answerQuestion, setQuizWalk, answers, steps } = useQuiz();
+  const { quiz, answers, steps } = useQuiz();
   return (
     <SafeAreaView style={[styles.container]}>
       <Image
@@ -66,7 +61,6 @@ const styles = StyleSheet.create({
     flex: 1,
     bottom: 0,
     marginBottom: 10,
-    // backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
