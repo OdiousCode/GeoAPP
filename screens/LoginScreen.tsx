@@ -1,3 +1,4 @@
+import { textAlign } from '@mui/system';
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -24,7 +25,16 @@ export default function LoginScreen({
         <View style={{ margin: 2 }}>
           <SmallText> Code </SmallText>
         </View>
-        <View style={[styles.inputContainer, { margin: 10 }]}>
+        <View
+          style={[
+            styles.inputContainer,
+            {
+              margin: 10,
+              minWidth: 100,
+              height: 30,
+            },
+          ]}
+        >
           <TextInput
             style={[styles.smallText]}
             keyboardType="numeric"
@@ -42,7 +52,7 @@ export default function LoginScreen({
             }
           }}
         >
-          Logga in
+          Gå med i Quiz
         </RegularButton>
         <Image source={require('../assets/geoappsplash.png')}></Image>
       </View>
@@ -83,6 +93,7 @@ let styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: 'normal',
     color: coltheme.background,
+    textAlign: 'center',
   },
   bigText: { fontSize: 29, fontWeight: 'bold', color: coltheme.secondary },
 });
