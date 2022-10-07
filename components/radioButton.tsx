@@ -52,13 +52,11 @@ const styles = StyleSheet.create({
   container: {
     width: ScreenWidth,
     alignItems: 'center',
-    /* justifyContent: 'space-between', */
     flexDirection: 'row',
     borderWidth: 6,
     borderColor: coltheme.primary,
     backgroundColor: coltheme.background,
     paddingVertical: 10,
-    /* paddingHorizontal: 30, */
     margin: 20,
     borderRadius: 5,
   },

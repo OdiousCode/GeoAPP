@@ -1,6 +1,5 @@
-import { textAlign } from '@mui/system';
 import React, { useState } from 'react';
-import { Image, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, Image, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { coltheme } from '../components/coltheme';
 import RegularButton from '../components/RegularButton';
@@ -13,7 +12,7 @@ export default function LoginScreen({
   navigation,
   route,
 }: RootScreenProps<'Login'>) {
-  const { quiz, answerQuestion, setQuizWalk } = useQuiz();
+  const { setQuizWalk } = useQuiz();
   const [text, setText] = useState(0);
 
   return (
@@ -43,25 +42,17 @@ export default function LoginScreen({
         </View>
         <RegularButton
           onPress={() => {
-            //TODO error handling
-
             let data = getData(text);
             if (data != undefined) {
               setQuizWalk(data);
               navigation.navigate('TabNavigator', { screen: 'HomeScreen' });
-            }
+            } else Alert.alert('No quiz by that code was found.');
           }}
         >
           Gå med i Quiz
         </RegularButton>
-        <Image source={require('../assets/geoappsplash.png')}></Image>
+        <Image source={require('../assets/geoappsplashv2.png')}></Image>
       </View>
-      {/* <View style={{ margin: 2 }}>
-        <Text style={[styles.smallText]}>Skapa en quiz?</Text>
-      </View> */}
-      {/* <View style={{ margin: 2 }}>
-        <Button color={coltheme.purple} title="Skapa quiz" />
-      </View> */}
     </SafeAreaView>
   );
 }
@@ -78,7 +69,6 @@ let styles = StyleSheet.create({
     flex: 1,
     bottom: 0,
     marginBottom: 10,
-    // backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'flex-end',
   },

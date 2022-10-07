@@ -1,4 +1,3 @@
-import { Login } from '@mui/icons-material';
 import { NavigatorScreenParams } from '@react-navigation/native';
 import {
   createNativeStackNavigator,

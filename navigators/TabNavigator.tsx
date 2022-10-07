@@ -9,29 +9,20 @@ import {
 } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import OverviewScreen from '../screens/OverviewScreen';
-import MapScreen from '../screens/MapScreen';
-import HomeScreen from '../screens/HomeScreen';
-// import HomeStackNavigator, { HomeStackParamList } from './HomeStackNavigator';
-import { RootStackParamList } from './RootStackNavigator';
-import QuestionStackNavigator, {
-  QuestionStackParamList,
-} from './QuestionStackNavigator';
 import { coltheme } from '../components/coltheme';
+import HomeScreen from '../screens/HomeScreen';
+import MapScreen from '../screens/MapScreen';
+import OverviewScreen from '../screens/OverviewScreen';
+import { QuestionStackParamList } from './QuestionStackNavigator';
+import { RootStackParamList } from './RootStackNavigator';
 
 export type TabParamList = {
   HomeScreen: undefined;
   MapScreen: undefined;
   OverviewScreen: undefined;
   QuestionStackNavigator: NavigatorScreenParams<QuestionStackParamList>;
-  // TabNavigator: NavigatorScreenParams<TabParamList>;
 };
-// export type TabParamList = {
-//   HomeTab: NavigatorScreenParams<HomeStackParamList>;
-//   ProfileTab: undefined;
-// };
 
-/** Use this to easily define screen props */
 export type TabScreenProps<Screen extends keyof TabParamList> =
   CompositeScreenProps<
     BottomTabScreenProps<TabParamList, Screen>,

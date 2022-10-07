@@ -1,21 +1,16 @@
-import { MaterialIcons } from '@expo/vector-icons';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { Dimensions, StyleSheet, View, Image } from 'react-native';
+import { Dimensions, Image, StyleSheet, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { RootTabsParamList } from '../App';
 import { coltheme } from '../components/coltheme';
 import { BigText, SmallText } from '../components/TextTemplates';
 import { useQuiz } from '../context/QuizContext';
-import { QuizWalk } from '../data/data';
 import { TabScreenProps } from '../navigators/TabNavigator';
 
 export default function MapScreen({
   navigation,
   route,
 }: TabScreenProps<'MapScreen'>) {
-  //data = XXX.fetch(route.params.quizWalkId);
   const { quiz, location, answers, unlockedQuestions } = useQuiz();
 
   return (

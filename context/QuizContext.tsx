@@ -1,3 +1,4 @@
+import * as Location from 'expo-location';
 import React, {
   createContext,
   ReactNode,
@@ -7,12 +8,10 @@ import React, {
 } from 'react';
 import { QuizWalk } from '../data/data';
 import useLocation from '../hooks/LocationSub';
-import { calcDistanceFromLongLat } from '../utils/functions/calcDistanceFromLongLat';
 import useSubscribeToSteps from '../hooks/Pedometer';
-import * as Location from 'expo-location';
-import { LocationObjectCoords } from 'expo-location';
-import { schedulePushNotification } from '../utils/functions/Notification';
 import { minDistanceToTrigger } from '../utils/constants/devSettings';
+import { calcDistanceFromLongLat } from '../utils/functions/calcDistanceFromLongLat';
+import { schedulePushNotification } from '../utils/functions/Notification';
 
 interface QuizAnswer {
   id: number;
@@ -85,7 +84,6 @@ function QuizProvider({ children }: Props) {
   }, [location]);
 
   const setQuizWalk = (activeQuiz: QuizWalk) => {
-    // let item: QuizItem = { activeQuiz: activeQuiz, answers: [] };
     setQuiz(activeQuiz);
     setAnswers([]);
     setUnlockedQuestions([]);
@@ -130,8 +128,8 @@ function QuizProvider({ children }: Props) {
 
   function verifyMovement() {
     if (quiz.id != 0) {
+      // check every question to see if standing on it
       for (let i = 0; i < quiz.questions.length; i++) {
-        // check every question to see if standing on it
         const question = quiz.questions[i];
 
         const lat1 = location.coords.latitude;
@@ -145,22 +143,13 @@ function QuizProvider({ children }: Props) {
           calcDistanceFromLongLat(lat1, long1, lat2, long2, 'K') <=
             minDistanceToTrigger
         ) {
-          console.log(
-            'Q found id: ' +
-              question.id +
-              ' t: ' +
-              question.title +
-              ' lat: ' +
-              question.latitude +
-              ' long: ' +
-              question.longitude
-          );
           unlockQuestion(question.id);
           schedulePushNotification(
             'TipsPro!',
             'Du har hittat en ny fråga!\n' + question.title
           );
-          console.log('Sent player notification for Q: ' + question.id);
+          // This return will ensure that only one notification is sent at a time, and not multiple in the case that the player is close to several questions.
+          // The side effect is that you have to trigger another movement to get the next question(s).
           return;
         }
       }

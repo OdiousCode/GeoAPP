@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from 'react';
 import * as Location from 'expo-location';
-import { schedulePushNotification } from '../utils/functions/Notification';
-import { useQuiz } from '../context/QuizContext';
-import { QuizWalk } from '../data/data';
+import { useEffect, useState } from 'react';
 
 export default function useLocation() {
   const initialState: Location.LocationObject = {
@@ -30,12 +27,6 @@ export default function useLocation() {
           },
           (_location) => {
             setLocation(_location);
-            console.log(
-              'Current player pos, Lat: ' +
-                _location.coords.latitude +
-                ' Long: ' +
-                _location.coords.longitude
-            );
           }
         );
       };
@@ -46,9 +37,7 @@ export default function useLocation() {
       }
       foregroundSubscrition();
     })();
-    return () => {
-      /*cleanup*/
-    };
+    return;
   }, []);
   return location;
 }
